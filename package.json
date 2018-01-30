@@ -1,0 +1,30 @@
+{
+  "name": "qqai-api-sdk",
+  "version": "1.0.4",
+  "description": "QQAI开放平台Nodejs SDK, 文档以及详情请访问官网: https://ai.qq.com/doc/index.shtml",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": {
+    "name": "wubo",
+    "email": "1280827369@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w89612b/qqai-api-sdk.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "randomstring": "^1.1.5"
+  },
+  "keyword": [
+    "qqai",
+    "qqainode",
+    "qqaisdk"
+  ],
+  "devDependencies": {
+    "mocha": "^4.1.0"
+  }
+}
