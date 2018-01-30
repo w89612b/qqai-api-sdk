@@ -10,7 +10,7 @@
 npm install qqai-api-sdk
 
 # use
-const { Translate } = require('../');
+const { Translate } = require('qqai-api-sdk');
 const APP = {
   // 设置请求数据（应用密钥、接口请求参数）
   appkey: 'your appkey',
@@ -39,7 +39,7 @@ translate.texttrans({text: '你好'}).then((res)=>{
         └── package.json                           //npm包描述文件
 # Demos
 
-* [http://qqai.jswebtest.com/](http://qqai.jswebtest.com/)
+* [https://ai.qq.com/](https://ai.qq.com/)
 
 # 详细使用文档
 
@@ -47,4 +47,4 @@ translate.texttrans({text: '你好'}).then((res)=>{
 
 # License
 
-[QQAI-API-SDK](https://github.com/w89612b/qqai-api-sdk) is released under [MIT licence](https://www.webrtc-experiment.com/licence/) . Copyright (c) [wubo](http://wubo.jswebtest.com/).
+[QQAI-API-SDK](https://github.com/w89612b/qqai-api-sdk) is released under [MIT licence](https://www.webrtc-experiment.com/licence/) . Copyright (c) [wubo](http://www.jswebtest.com/).
