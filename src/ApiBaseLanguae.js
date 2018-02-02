@@ -8,14 +8,14 @@ const PS = require('./client/ProxyServices');
 module.exports = class BaseLanguae {
   /**
    * 自然语言处理基础部分
-   * @param {String} app_key 应用key
-   * @param {String} app_id  应用id
-   * @function wordseg(Object) 分词
-   * @function wordpos(Object) 词性标注
-   * @function wordner(Object) 专有名词识别
-   * @function wordsyn(Object) 同义词识别
-   * @function wordcom(Object) 语义解析
-   * @function textpolar(Object) 情感分析
+   * @prop {String} app_key 应用key
+   * @prop {String} app_id  应用id
+   * @function wordseg(String) 分词
+   * @function wordpos(String) 词性标注
+   * @function wordner(String) 专有名词识别
+   * @function wordsyn(String) 同义词识别
+   * @function wordcom(String) 语义解析
+   * @function textpolar(String) 情感分析
    * @function textchat(Object) 智能闲聊
    * @example
    *  new BaseLanguae('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')

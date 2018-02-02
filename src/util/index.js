@@ -98,7 +98,7 @@ module.exports.URIS = {
   imgtotext: '/fcgi-bin/vision/vision_imgtotext',
   // 模糊图片检测doc https://ai.qq.com/doc/imagefuzzy.shtml
   imagefuzzy: '/fcgi-bin/image/image_fuzzy',
-  // 获取人脸信息doc https://ai.qq.com/doc/imagefood.shtml
+  // 美食图片识别doc https://ai.qq.com/doc/imagefood.shtml
   imagefood: '/fcgi-bin/image/image_food',
   // 图片特效
   // 人脸美妆doc https://ai.qq.com/doc/facecosmetic.shtml

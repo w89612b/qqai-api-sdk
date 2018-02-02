@@ -65,6 +65,7 @@ class ProxyServices {
     str += `app_key=${this.appkey}`;
     // 4. MD5运算+转换大写，得到请求签名
     sign = crypto.createHash('md5').update(str).digest('hex').toUpperCase()
+    console.log(sign)
     return sign;
   }
 

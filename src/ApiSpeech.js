@@ -8,8 +8,8 @@ const PS = require('./client/ProxyServices');
 module.exports = class Speech{
   /**
    * 智能语音API服务类
-   * @param {String} app_key 应用key
-   * @param {String} app_id  应用id
+   * @prop {String} app_key 应用key
+   * @prop {String} app_id  应用id
    * @function tts(Object) 语音合成（AI Lab）
    * @function tta(Object) 语音合成（优图）
    * @function asr(Object) 语音识别-echo版
@@ -92,7 +92,7 @@ module.exports = class Speech{
    */
   asr({speech = '', format = 2, rate = 8000}) {
     if(speech && Buffer.byteLength(speech, 'base64') < 1048576 * 8){
-      return PS(URIS.asr, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, speech: speech, format: format, rate: rate}));
+      return PS(URIS.asr, this.appKey, Object.assign({}, commonParams(), {app_id: this.appId, speech: speech, format: format, rate: rate}));
     } else {
       return error(`speech 不能为空`);
     }
