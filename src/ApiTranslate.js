@@ -1,4 +1,8 @@
-const { URIS, commonParams, error } = require('./util');
+const {
+  URIS,
+  commonParams,
+  error
+} = require('./util');
 const PS = require('./client/ProxyServices');
 /**
  * 机器翻译API服务类
@@ -19,6 +23,10 @@ module.exports = class Translate {
    *  new Translate('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
   constructor(appKey, appId) {
+    if (appKey || appId) {
+      console.log(`appKey and appId are required`);
+      return;
+    }
     this.appKey = appKey;
     this.appId = appId;
   }
@@ -51,9 +59,16 @@ module.exports = class Translate {
    *  })
    * @return A Promise Object
    */
-  texttrans({type = 0, text = ''}) {
-    if(text && Buffer.byteLength(text, 'utf8') < 1024){
-      return PS(URIS.texttrans, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, type: type, text: text}));
+  texttrans({
+    type = 0,
+    text = ''
+  }) {
+    if (text && Buffer.byteLength(text, 'utf8') < 1024) {
+      return PS(URIS.texttrans, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        type: type,
+        text: text
+      }));
     } else {
       return error(`text不能为空 或者应小于 1024B`);
     }
@@ -88,9 +103,18 @@ module.exports = class Translate {
    *  })
    * @return A Promise Object
    */
-  texttranslate({text = '', source = 'auto', target = 'zh' }) {
-    if(text && Buffer.byteLength(text, 'utf8') < 1024){
-      return PS(URIS.texttranslate, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text, source: source, target: target}));
+  texttranslate({
+    text = '',
+    source = 'auto',
+    target = 'zh'
+  }) {
+    if (text && Buffer.byteLength(text, 'utf8') < 1024) {
+      return PS(URIS.texttranslate, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text,
+        source: source,
+        target: target
+      }));
     } else {
       return error(`text不能为空 或者应小于 1024B`);
     }
@@ -114,10 +138,23 @@ module.exports = class Translate {
    *  })
    * @return A Promise Object
    */
-  imagetranslate({image = '', session_id = '', scene = 'word', source = 'auto', target = 'en'}) {
-    if(image && session_id){
-      if(Buffer.byteLength(image, 'base64') < 1048576){
-        return PS(URIS.imagetranslate, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, image: image, session_id: session_id, scene: scene, source: source, target: target}));
+  imagetranslate({
+    image = '',
+    session_id = '',
+    scene = 'word',
+    source = 'auto',
+    target = 'en'
+  }) {
+    if (image && session_id) {
+      if (Buffer.byteLength(image, 'base64') < 1048576) {
+        return PS(URIS.imagetranslate, this.appKey, Object.assign({}, commonParams(), {
+          app_id: this.appId,
+          image: image,
+          session_id: session_id,
+          scene: scene,
+          source: source,
+          target: target
+        }));
       } else {
         return error(`图片大小必须小于1M`);
       }
@@ -148,10 +185,27 @@ module.exports = class Translate {
    *  })
    * @return A Promise Object
    */
-  speechtranslate({format = 8, seq = 0, end = 1, session_id = '', speech_chunk = '', source = 'auto', target = 'en'}) {
-    if(speech_chunk && session_id){
-      if(Buffer.byteLength(speech_chunk, 'base64') < 1048576 * 8){
-        return PS(URIS.speechtranslate, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, format: format, seq: seq, end: 1, session_id: session_id, speech_chunk: speech_chunk, source: source, target: target}));
+  speechtranslate({
+    format = 8,
+    seq = 0,
+    end = 1,
+    session_id = '',
+    speech_chunk = '',
+    source = 'auto',
+    target = 'en'
+  }) {
+    if (speech_chunk && session_id) {
+      if (Buffer.byteLength(speech_chunk, 'base64') < 1048576 * 8) {
+        return PS(URIS.speechtranslate, this.appKey, Object.assign({}, commonParams(), {
+          app_id: this.appId,
+          format: format,
+          seq: seq,
+          end: 1,
+          session_id: session_id,
+          speech_chunk: speech_chunk,
+          source: source,
+          target: target
+        }));
       } else {
         return error(`speech_chunk必须小于8M`);
       }
@@ -175,9 +229,18 @@ module.exports = class Translate {
    *  })
    * @return A Promise Object
    */
-  textdetect({text,candidate_langs = '',force = 0}) {
-    if(text && Buffer.byteLength(text, 'utf8') < 1024){
-      return PS(URIS.textdetect, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text, candidate_langs: candidate_langs, force: force}));
+  textdetect({
+    text,
+    candidate_langs = '',
+    force = 0
+  }) {
+    if (text && Buffer.byteLength(text, 'utf8') < 1024) {
+      return PS(URIS.textdetect, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text,
+        candidate_langs: candidate_langs,
+        force: force
+      }));
     } else {
       return error(`text不能为空 或者应小于 1024B`);
     }

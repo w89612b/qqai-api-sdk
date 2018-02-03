@@ -1,11 +1,15 @@
-const { URIS, commonParams, error } = require('./util');
+const {
+  URIS,
+  commonParams,
+  error
+} = require('./util');
 const PS = require('./client/ProxyServices');
 /**
  * 智能语音API服务类
  * @description 提供QQAI智能语音模块的API调用
  * @author wubo
  */
-module.exports = class Speech{
+module.exports = class Speech {
   /**
    * 智能语音API服务类
    * @prop {String} app_key 应用key
@@ -20,6 +24,10 @@ module.exports = class Speech{
    *  new Speech('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
   constructor(appKey, appId) {
+    if (appKey || appId) {
+      console.log(`appKey and appId are required`);
+      return;
+    }
     this.appKey = appKey;
     this.appId = appId;
   }
@@ -46,9 +54,26 @@ module.exports = class Speech{
    *  })
    * @return A Promise Object
    */
-  tts({text = '', speaker = 1, format = 2, volume = 10, speed = 100, aht = 0, apc = 58}) {
-    if(text && Buffer.byteLength(text, 'utf8') < 150){
-      return PS(URIS.tta, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text, speaker: speaker, format: format, volume: volume, speed: speed, aht: aht, apc: apc}));
+  tts({
+    text = '',
+    speaker = 1,
+    format = 2,
+    volume = 10,
+    speed = 100,
+    aht = 0,
+    apc = 58
+  }) {
+    if (text && Buffer.byteLength(text, 'utf8') < 150) {
+      return PS(URIS.tta, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text,
+        speaker: speaker,
+        format: format,
+        volume: volume,
+        speed: speed,
+        aht: aht,
+        apc: apc
+      }));
     } else {
       return error(`text不能为空 或者应小于 150B`);
     }
@@ -68,9 +93,18 @@ module.exports = class Speech{
    *  })
    * @return A Promise Object
    */
-  tta({text = '', model_type = 0, speed = 0}) {
-    if(text && Buffer.byteLength(text, 'utf8') < 300){
-      return PS(URIS.tta, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text, model_type: model_type, speed: speed}));
+  tta({
+    text = '',
+    model_type = 0,
+    speed = 0
+  }) {
+    if (text && Buffer.byteLength(text, 'utf8') < 300) {
+      return PS(URIS.tta, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text,
+        model_type: model_type,
+        speed: speed
+      }));
     } else {
       return error(`text不能为空 或者应小于 300B`);
     }
@@ -90,9 +124,18 @@ module.exports = class Speech{
    *  })
    * @return A Promise Object
    */
-  asr({speech = '', format = 2, rate = 8000}) {
-    if(speech && Buffer.byteLength(speech, 'base64') < 1048576 * 8){
-      return PS(URIS.asr, this.appKey, Object.assign({}, commonParams(), {app_id: this.appId, speech: speech, format: format, rate: rate}));
+  asr({
+    speech = '',
+    format = 2,
+    rate = 8000
+  }) {
+    if (speech && Buffer.byteLength(speech, 'base64') < 1048576 * 8) {
+      return PS(URIS.asr, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        speech: speech,
+        format: format,
+        rate: rate
+      }));
     } else {
       return error(`speech 不能为空`);
     }
@@ -125,9 +168,26 @@ module.exports = class Speech{
    *  })
    * @return A Promise Object
    */
-  asrs({speech_chunk = '', speech_id = '', len = 0, seq = 0, end = 1, format = 2, rate = 8000}) {
-    if(speech_chunk && Buffer.byteLength(speech_chunk, 'base64') < 1048576 * 8 && speech_id && len){
-      return PS(URIS.asrs, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, speech_chunk: speech_chunk, speech_id: speech_id, len: len, seq: seq, end: end, format: format, rate: rate}));
+  asrs({
+    speech_chunk = '',
+    speech_id = '',
+    len = 0,
+    seq = 0,
+    end = 1,
+    format = 2,
+    rate = 8000
+  }) {
+    if (speech_chunk && Buffer.byteLength(speech_chunk, 'base64') < 1048576 * 8 && speech_id && len) {
+      return PS(URIS.asrs, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        speech_chunk: speech_chunk,
+        speech_id: speech_id,
+        len: len,
+        seq: seq,
+        end: end,
+        format: format,
+        rate: rate
+      }));
     } else {
       return error(`speech_chunk/speech_id 不能为空, len不能为0  或者 speech_chunk大小必须小余8M`);
     }
@@ -167,8 +227,19 @@ module.exports = class Speech{
    * @return A Promise Object
    */
   wxasrs(speech_chunk = '', speech_id = '', len = 0, seq = 0, end = 1, format = 2, rate = 16000, bits = 16, cont_res = 0) {
-    if(speech_chunk && speech_id && len){
-      return PS(URIS.wxasrs, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, speech_chunk: speech_chunk, speech_id: speech_id, len: len, seq: seq, end: end, format: format, rate: rate, bits: bits, cont_res: cont_res}));
+    if (speech_chunk && speech_id && len) {
+      return PS(URIS.wxasrs, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        speech_chunk: speech_chunk,
+        speech_id: speech_id,
+        len: len,
+        seq: seq,
+        end: end,
+        format: format,
+        rate: rate,
+        bits: bits,
+        cont_res: cont_res
+      }));
     } else {
       return error(`speech_chunk/speech_id 不能为空, len不能为0`);
     }
@@ -190,10 +261,21 @@ module.exports = class Speech{
    *  })
    * @return A Promise Object
    */
-  wxasrlong({format = 2, callback_url = '', speech = '', speech_url = '' }) {
-    if(callback_url && (speech || speech_url)){
-      if(Buffer.byteLength(speech, 'base64') < 1048576 * 5 || speech_url){
-        return PS(URIS.wxasrlong, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, speech_url: speech_url, speech: speech, callback_url: callback_url, format: format}));
+  wxasrlong({
+    format = 2,
+    callback_url = '',
+    speech = '',
+    speech_url = ''
+  }) {
+    if (callback_url && (speech || speech_url)) {
+      if (Buffer.byteLength(speech, 'base64') < 1048576 * 5 || speech_url) {
+        return PS(URIS.wxasrlong, this.appKey, Object.assign({}, commonParams(), {
+          app_id: this.appId,
+          speech_url: speech_url,
+          speech: speech,
+          callback_url: callback_url,
+          format: format
+        }));
       } else {
         return error(`speech大小必须小余5M`);
       }

@@ -9,8 +9,11 @@
  */
 module.exports = {
   BaseLanguae: require('./ApiBaseLanguae'),
+  Face: require('./ApiFace'),
+  ImgPublic: require('./ApiImgPublic'),
+  ImgSpecialEffects: require('./ApiImgSpecialEffects'),
+  OCR: require('./ApiOCR'),
+  Person: require('./ApiPerson'),
   Speech: require('./ApiSpeech'),
   Translate: require('./ApiTranslate'),
-  ImgPublic: require('./ApiImgPublic'),
-  OCR: require('./ApiOCR')
 }

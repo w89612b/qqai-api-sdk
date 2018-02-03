@@ -1,4 +1,8 @@
-const { URIS, commonParams, error } = require('./util');
+const {
+  URIS,
+  commonParams,
+  error
+} = require('./util');
 const PS = require('./client/ProxyServices');
 /**
  * 自然语言处理API基础服务类
@@ -21,6 +25,10 @@ module.exports = class BaseLanguae {
    *  new BaseLanguae('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
   constructor(appKey, appId) {
+    if (appKey || appId) {
+      console.log(`appKey and appId are required`);
+      return;
+    }
     this.appKey = appKey;
     this.appId = appId;
   }
@@ -37,8 +45,11 @@ module.exports = class BaseLanguae {
    * @return A Promise Object
    */
   wordseg(text) {
-    if(text && Buffer.byteLength(text, 'GBK') < 1024){
-      return PS(URIS.wordseg, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text}));
+    if (text && Buffer.byteLength(text, 'GBK') < 1024) {
+      return PS(URIS.wordseg, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text
+      }));
     } else {
       return error(`text不能为空 或者GBK编码应小于1024B`);
     }
@@ -55,8 +66,11 @@ module.exports = class BaseLanguae {
    * @return A Promise Object
    */
   wordpos(text) {
-    if(text && Buffer.byteLength(text, 'GBK') < 1024){
-      return PS(URIS.wordpos, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text}));
+    if (text && Buffer.byteLength(text, 'GBK') < 1024) {
+      return PS(URIS.wordpos, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text
+      }));
     } else {
       return error(`text不能为空 或者GBK编码应小于1024B`);
     }
@@ -73,8 +87,11 @@ module.exports = class BaseLanguae {
    * @return A Promise Object
    */
   wordner(text) {
-    if(text && Buffer.byteLength(text, 'GBK') < 1024){
-      return PS(URIS.wordner, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text}));
+    if (text && Buffer.byteLength(text, 'GBK') < 1024) {
+      return PS(URIS.wordner, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text
+      }));
     } else {
       return error(`text不能为空 或者GBK编码应小于1024B`);
     }
@@ -91,8 +108,11 @@ module.exports = class BaseLanguae {
    * @return A Promise Object
    */
   wordsyn(text) {
-    if(text && Buffer.byteLength(text, 'GBK') < 1024){
-      return PS(URIS.wordsyn, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text}));
+    if (text && Buffer.byteLength(text, 'GBK') < 1024) {
+      return PS(URIS.wordsyn, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text
+      }));
     } else {
       return error(`text不能为空 或者GBK编码应小于1024B`);
     }
@@ -109,8 +129,11 @@ module.exports = class BaseLanguae {
    * @return A Promise Object
    */
   wordcom(text) {
-    if(text && Buffer.byteLength(text, 'utf8') < 100){
-      return PS(URIS.wordcom, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text}));
+    if (text && Buffer.byteLength(text, 'utf8') < 100) {
+      return PS(URIS.wordcom, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text
+      }));
     } else {
       return error(`text不能为空 或者UTF-8编码应小于100B`);
     }
@@ -127,8 +150,11 @@ module.exports = class BaseLanguae {
    * @return A Promise Object
    */
   textpolar(text) {
-    if(text && Buffer.byteLength(text, 'utf8') < 200){
-      return PS(URIS.textpolar, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, text: text}));
+    if (text && Buffer.byteLength(text, 'utf8') < 200) {
+      return PS(URIS.textpolar, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        text: text
+      }));
     } else {
       return error(`text不能为空 或者UTF-8编码应小于200B`);
     }
@@ -146,9 +172,16 @@ module.exports = class BaseLanguae {
    *  })
    * @return A Promise Object
    */
-  textchat({question = '', session = ''}) {
-    if(question && Buffer.byteLength(question, 'utf8') < 300 && session && Buffer.byteLength(session, 'utf8') < 64 ){
-      return PS(URIS.textchat, this.appKey, Object.assign({},commonParams(), {app_id: this.appId, question: question, session: session}));
+  textchat({
+    question = '',
+    session = ''
+  }) {
+    if (question && Buffer.byteLength(question, 'utf8') < 300 && session && Buffer.byteLength(session, 'utf8') < 64) {
+      return PS(URIS.textchat, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        question: question,
+        session: session
+      }));
     } else {
       return error(`question/session不能为空 或者questio UTF-8编码应小于300B session  UTF-8编码应小于64B`);
     }

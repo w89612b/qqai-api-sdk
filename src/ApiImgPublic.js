@@ -2,7 +2,7 @@ const {
   URIS,
   commonParams,
   error
-} = require('./util/index');
+} = require('./util');
 const PS = require('./client/ProxyServices');
 /**
  * 图片识别公共API服务类
@@ -48,7 +48,7 @@ module.exports = class ImgPublic {
    */
   porn(imageBase64String) {
     if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
-      return PS(URIS.porn, this.appKey, Object.assign({}, constructor(), {
+      return PS(URIS.porn, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
         image: imageBase64String
       }));
@@ -68,7 +68,7 @@ module.exports = class ImgPublic {
    */
   terrorism(imageBase64String) {
     if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
-      return PS(URIS.terrorism, this.appKey, Object.assign({}, constructor(), {
+      return PS(URIS.terrorism, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
         image: imageBase64String
       }));
@@ -92,10 +92,19 @@ module.exports = class ImgPublic {
    * })
    * @return A Promise Object
    */
-  scener({image, format = 1, topk = 1}) {
-    if(image && Buffer.byteLength(image, 'base64') < 1048576){
-      return PS(URIS.scener, this.appKey, Object.assign({}, constructor(), { app_id: this.appId, image: image, format: format, topk: topk}));
-    }else{
+  scener({
+    image,
+    format = 1,
+    topk = 1
+  }) {
+    if (image && Buffer.byteLength(image, 'base64') < 1048576) {
+      return PS(URIS.scener, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: image,
+        format: format,
+        topk: topk
+      }));
+    } else {
       return error('image 不能为空 且 大小小余1M');
     }
   }
@@ -115,10 +124,19 @@ module.exports = class ImgPublic {
    * })
    * @return A Promise Object
    */
-  objectr({image, format = 1, topk = 1}) {
-    if(image && Buffer.byteLength(image, 'base64') < 1048576){
-      return PS(URIS.objectr, this.appKey, Object.assign({}, constructor(), { app_id: this.appId, image: image, format: format, topk: topk}));
-    }else{
+  objectr({
+    image,
+    format = 1,
+    topk = 1
+  }) {
+    if (image && Buffer.byteLength(image, 'base64') < 1048576) {
+      return PS(URIS.objectr, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: image,
+        format: format,
+        topk: topk
+      }));
+    } else {
       return error('image 不能为空 且 大小小余1M');
     }
   }
@@ -132,10 +150,13 @@ module.exports = class ImgPublic {
    * imagetag(imageBase64String)
    * @return A Promise Object
    */
-  imagetag(imageBase64String){
-    if(imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576){
-      return PS(URIS.imagetag, this.appKey, Object.assign({}, constructor(), { app_id: this.appId, image: imageBase64String}));
-    }else{
+  imagetag(imageBase64String) {
+    if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
+      return PS(URIS.imagetag, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: imageBase64String
+      }));
+    } else {
       return error('imageBase64String 不能为空 且 大小小余1M');
     }
   }
@@ -150,10 +171,14 @@ module.exports = class ImgPublic {
    * imgidentify(imageBase64String, scene)
    * @return A Promise Object
    */
-  imgidentify(imageBase64String, scene = 1){
-    if(imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576){
-      return PS(URIS.imgidentify, this.appKey, Object.assign({}, constructor(), { app_id: this.appId, image: imageBase64String, scene: scene}));
-    }else{
+  imgidentify(imageBase64String, scene = 1) {
+    if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
+      return PS(URIS.imgidentify, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: imageBase64String,
+        scene: scene
+      }));
+    } else {
       return error('imageBase64String 不能为空 且 大小小余1M');
     }
   }
@@ -168,10 +193,14 @@ module.exports = class ImgPublic {
    * imgtotext(imageBase64String)
    * @return A Promise Object
    */
-  imgtotext(imageBase64String, session_id){
-    if(imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576 && session_id && Buffer.byteLength(session_id, 'base64') < 64){
-      return PS(URIS.imgtotext, this.appKey, Object.assign({}, constructor(), { app_id: this.appId, image: imageBase64String, session_id: session_id}));
-    }else{
+  imgtotext(imageBase64String, session_id) {
+    if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576 && session_id && Buffer.byteLength(session_id, 'base64') < 64) {
+      return PS(URIS.imgtotext, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: imageBase64String,
+        session_id: session_id
+      }));
+    } else {
       return error('imageBase64String/session_id 不能为空 且 imageBase64String大小小余1M session_id长度小于64B');
     }
   }
@@ -185,10 +214,13 @@ module.exports = class ImgPublic {
    * imagefuzzy(imageBase64String)
    * @return A Promise Object
    */
-  imagefuzzy(imageBase64String){
-    if(imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576){
-      return PS(URIS.imagefuzzy, this.appKey, Object.assign({}, constructor(), { app_id: this.appId, image: imageBase64String}));
-    }else{
+  imagefuzzy(imageBase64String) {
+    if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
+      return PS(URIS.imagefuzzy, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: imageBase64String
+      }));
+    } else {
       return error('imageBase64String 不能为空 且 大小小余1M');
     }
   }
@@ -201,10 +233,13 @@ module.exports = class ImgPublic {
    * imagefood(imageBase64String)
    * @return A Promise Object
    */
-  imagefood(imageBase64String){
-    if(imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576){
-      return PS(URIS.imagefood, this.appKey, Object.assign({}, constructor(), { app_id: this.appId, image: imageBase64String}));
-    }else{
+  imagefood(imageBase64String) {
+    if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
+      return PS(URIS.imagefood, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: imageBase64String
+      }));
+    } else {
       return error('imageBase64String 不能为空 且 大小小余1M');
     }
   }

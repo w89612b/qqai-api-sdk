@@ -1,4 +1,4 @@
-# QQAI-API-SDK to Node.js
+# QQAI-API-SDK to Node.js 非官方平台提供
 
 # 安装QQAI开放平台 Node.js SDK
 
@@ -30,10 +30,12 @@ translate.texttrans({text: '你好'}).then((res)=>{
         ├── src
         │  ├── client                              //通用代理请求类
         │  ├── util                                //通用数据类
-        │  ├── ApiBaseLanguae.js                   //自然语言处理-基本类    
-        │  ├── ApiImageSpecialEffects.js           //计算机视觉-图片特效类  
+        │  ├── ApiBaseLanguae.js                   //自然语言处理-基本类 
+        │  ├── ApiFace.js                          //计算机视觉-面部识别类     
         │  ├── ApiImgPublic.js                     //计算机视觉-图片识别公共类  
-        │  ├── ApiOCR.js                           //计算机视觉-ORC类     
+        │  ├── ApiImgSpecialEffects.js             //计算机视觉-图片特效类   
+        │  ├── ApiOCR.js                           //计算机视觉-ORC类    
+        │  ├── ApiPersion.js                       //计算机视觉-人体管理类   
         │  ├── ApiSpeech.js                        //智能语音 
         │  ├── ApiTranslate.js                     //自然语言处理-翻译类  
         │  └── index.js                            //入口文件
@@ -45,7 +47,8 @@ translate.texttrans({text: '你好'}).then((res)=>{
 * [https://ai.qq.com/](https://ai.qq.com/)
 
 # 日志
-2018年01月02日  添加 计算机视觉 图片识别公共类、ORC类
+2018年02月03日  添加 计算机视觉 面部识别类、人体管理类、图片特效类
+2018年02月02日  添加 计算机视觉 图片识别公共类、ORC类
 
 # 详细使用文档
 
