@@ -1,6 +1,6 @@
-# QQAI-API-SDK to Node.js 非官方平台提供
+# QQAI-API-SDK to Node.js 
 
-# 安装QQAI开放平台 Node.js SDK
+# 安装QQAI开放平台 Node.js SDK 非官方平台提供
 
 * http://qqai.jswebtest.com/
 
@@ -47,7 +47,7 @@ translate.texttrans({text: '你好'}).then((res)=>{
 * [https://ai.qq.com/](https://ai.qq.com/)
 
 # 日志
-2018年02月03日  添加 计算机视觉 面部识别类、人体管理类、图片特效类
+2018年02月03日  添加 计算机视觉 面部识别类、人体管理类、图片特效类  
 2018年02月02日  添加 计算机视觉 图片识别公共类、ORC类
 
 # 详细使用文档
