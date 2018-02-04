@@ -7,7 +7,8 @@ const PS = require('./client/ProxyServices');
 /**
  * 图片识别公共API服务类
  * @description 提供QQAI图片识别公共模块的API调用
- * @author wubo
+ * @author wubo 2018-02-02
+ * @version 1.0.7
  */
 module.exports = class ImgPublic {
   /**
@@ -30,7 +31,7 @@ module.exports = class ImgPublic {
     appKey,
     appId
   }) {
-    if (appKey || appId) {
+    if (!appKey || !appId) {
       console.log(`appKey and appId are required`);
       return;
     }

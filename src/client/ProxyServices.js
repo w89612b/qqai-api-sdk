@@ -12,6 +12,8 @@ const crypto = require('crypto');
  * @example 
  *   new ProxyServices(uri, appkey, opt, resolve, reject)
  * @returns ProxyServices实体类
+ * @author wubo 2018-01-30
+ * @version 1.0.4
  */
 class ProxyServices {
   constructor(uri, appkey, opt, resolve, reject) {
@@ -65,7 +67,7 @@ class ProxyServices {
     str += `app_key=${this.appkey}`;
     // 4. MD5运算+转换大写，得到请求签名
     sign = crypto.createHash('md5').update(str).digest('hex').toUpperCase()
-    console.log(sign)
+    //console.log(sign)
     return sign;
   }
 

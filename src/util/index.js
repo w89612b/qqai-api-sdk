@@ -1,3 +1,11 @@
+/**
+ * 定义通用类
+ * @exports URIS 请求接口地址数据
+ * @exports commonParams 签名通用字段处理方法 时间和随机字符串
+ * @exports error 参数错误处理方法， 模拟服务器返回 通用定义错误类型为4096
+ * @author wubo 2018-01-30
+ * @version 1.0.4
+ */
 const randomString = require('randomstring');
 module.exports.URIS = {
   // 智能语音

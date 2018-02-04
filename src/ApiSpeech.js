@@ -7,7 +7,8 @@ const PS = require('./client/ProxyServices');
 /**
  * 智能语音API服务类
  * @description 提供QQAI智能语音模块的API调用
- * @author wubo
+ * @author wubo 2018-01-30
+ * @version 1.0.4
  */
 module.exports = class Speech {
   /**
@@ -24,7 +25,7 @@ module.exports = class Speech {
    *  new Speech('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
   constructor(appKey, appId) {
-    if (appKey || appId) {
+    if (!appKey || !appId) {
       console.log(`appKey and appId are required`);
       return;
     }
@@ -45,9 +46,9 @@ module.exports = class Speech {
    * @example 
    *  tts({
    *    text: '你好中国',
-   *    speaker: 'hi',
-   *    format: 'zh,en',
-   *    volume: 0,
+   *    speaker: 1,
+   *    format: 2,
+   *    volume: 10,
    *    speed: 100,
    *    aht: 0,
    *    apc: 58
@@ -64,7 +65,7 @@ module.exports = class Speech {
     apc = 58
   }) {
     if (text && Buffer.byteLength(text, 'utf8') < 150) {
-      return PS(URIS.tta, this.appKey, Object.assign({}, commonParams(), {
+      return PS(URIS.tts, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
         text: text,
         speaker: speaker,

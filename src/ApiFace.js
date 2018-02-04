@@ -3,7 +3,8 @@ const PS = require('./client/ProxyServices');
 /**
  * 面部识别API服务类
  * @description 提供QQAI面部识别模块的API调用
- * @author wubo
+ * @author wubo 2018-02-03
+ * @version 1.0.9
  */
 module.exports = class Face {
   /**
@@ -20,7 +21,7 @@ module.exports = class Face {
    * new Face('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
   constructor(appKey, appId){
-    if (appKey || appId) {
+    if (!appKey || !appId) {
       console.log(`appKey and appId are required`);
       return;
     }

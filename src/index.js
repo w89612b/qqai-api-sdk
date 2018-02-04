@@ -5,7 +5,8 @@
  * QQAI开放平台Node.js操作库,非官方平台提供
  * 
  * @file index
- * @author wubo
+ * @author wubo 2018-01-30
+ * @version 1.0.4
  */
 module.exports = {
   BaseLanguae: require('./ApiBaseLanguae'),

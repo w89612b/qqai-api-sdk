@@ -7,7 +7,8 @@ const PS = require('./client/ProxyServices');
 /**
  * 自然语言处理API基础服务类
  * @description 提供QQAI自然语言处理API基础服务模块的API调用
- * @author wubo
+ * @author wubo 2018-01-30
+ * @version 1.0.4
  */
 module.exports = class BaseLanguae {
   /**
@@ -25,7 +26,7 @@ module.exports = class BaseLanguae {
    *  new BaseLanguae('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
   constructor(appKey, appId) {
-    if (appKey || appId) {
+    if (!appKey || !appId) {
       console.log(`appKey and appId are required`);
       return;
     }

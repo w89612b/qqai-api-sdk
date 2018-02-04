@@ -7,7 +7,8 @@ const PS = require('./client/ProxyServices');
 /**
  * OCR API服务类
  * @description 提供QQAI OCR模块的API调用
- * @author wubo
+ * @author wubo 2018-02-02
+ * @version 1.0.7
  */
 module.exports = class OCR {
   /**
@@ -24,7 +25,7 @@ module.exports = class OCR {
    *  new OCR('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
   constructor(appKey, appId) {
-    if (appKey || appId) {
+    if (!appKey || !appId) {
       console.log(`appKey and appId are required`);
       return;
     }
@@ -37,17 +38,17 @@ module.exports = class OCR {
    * @description 根据用户上传的包含身份证正反面照片，识别并且获取证件姓名、性别、民族、出生日期、地址、身份证号、证件有效期、发证机关等详细的身份证信息，并且可以返回精确剪裁对齐后的身份证正反面图片。
    * 具体参数查看：https://ai.qq.com/doc/ocridcardocr.shtml
    * @param {String} imageBase64String  待识别图片 原始图片的base64编码数据（原图大小上限1MB，支持JPG、PNG、BMP格式）
-   * @param {Number} type  身份证图片类型，0-正面，1-反面
+   * @param {Number} card_type  身份证图片类型，0-正面，1-反面
    * @example
    * idcardocr(imageBase64String, type)
    * @return A Promise Object
    */
-  idcardocr(imageBase64String, type = 0) {
+  idcardocr(imageBase64String, card_type = 0) {
     if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
       return PS(URIS.idcardocr, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
         image: imageBase64String,
-        type: type
+        card_type: card_type
       }));
     } else {
       return error('imageBase64String 不能为空 且 大小小余1M');
