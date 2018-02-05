@@ -1,6 +1,6 @@
 {
   "name": "qqai-api-sdk",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "QQAI开放平台Nodejs SDK, 非官方平台提供 文档以及详情请访问官网: https://ai.qq.com/doc/index.shtml",
   "main": "./src/index.js",
   "scripts": {
@@ -17,7 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "crypto": "^1.0.1",
-    "randomstring": "^1.1.5"
+    "randomstring": "^1.1.5",
+    "iconv-lite": "^0.4.19"
   },
   "keyword": [
     "qqai",

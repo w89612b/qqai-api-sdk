@@ -54,3 +54,12 @@ speech.asr({
 }, (e) => {
   console.log('语音识别-echo版 WAV', JSON.stringify(e));
 });
+speech.asr({
+  speech: fsReadSync(`${__dirname}/file/VOICE1513237078.pcm`),
+  format:1,
+  rate: 16000
+}).then((res) => {
+  console.log('语音识别-echo版 PCM', JSON.stringify(res));
+}, (e) => {
+  console.log('语音识别-echo版 PCM', JSON.stringify(e));
+});

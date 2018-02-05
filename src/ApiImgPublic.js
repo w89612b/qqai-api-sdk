@@ -27,10 +27,7 @@ module.exports = class ImgPublic {
    * @example
    *  new ImgPublic('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
-  constructor({
-    appKey,
-    appId
-  }) {
+  constructor(appKey, appId) {
     if (!appKey || !appId) {
       console.log(`appKey and appId are required`);
       return;
