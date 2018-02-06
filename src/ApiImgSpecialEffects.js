@@ -43,8 +43,8 @@ module.exports = class ImgSpecialEffects {
    * facecosmetic(imageBase64String, 1)
    * @return A Promise Object
    */
-  facecosmetic(image, cosmetic) {
-    if (image && Buffer.byteLength(image, 'base64') >= 5120) {
+  facecosmetic(image, cosmetic = 1) {
+    if (image && Buffer.byteLength(image, 'base64') >= 500 * 1024) {
       return error('image 不能为空且大小小余500KB');
     }
     if (cosmetic && cosmetic < 1 && cosmetic > 22) {
@@ -66,8 +66,8 @@ module.exports = class ImgSpecialEffects {
    * facedecoration(imageBase64String, 1)
    * @return A Promise Object
    */
-  facedecoration(image, decoration) {
-    if (image && Buffer.byteLength(image, 'base64') >= 5120) {
+  facedecoration(image, decoration = 1) {
+    if (image && Buffer.byteLength(image, 'base64') >= 500 * 1024) {
       return error('image 不能为空且大小小余500KB');
     }
     if (decoration && decoration < 1 && decoration > 22) {
@@ -91,7 +91,7 @@ module.exports = class ImgSpecialEffects {
    * @return A Promise Object
    */
   ptuimgfilter(image, filter) {
-    if (image && Buffer.byteLength(image, 'base64') >= 5120) {
+    if (image && Buffer.byteLength(image, 'base64') >= 500 * 1024) {
       return error('image 不能为空且大小小余500KB');
     }
     if (filter && filter < 1 && filter > 32) {
@@ -144,7 +144,7 @@ module.exports = class ImgSpecialEffects {
    * @return A Promise Object
    */
   facemerge(image, model) {
-    if (image && Buffer.byteLength(image, 'base64') >= 5120) {
+    if (image && Buffer.byteLength(image, 'base64') >= 500 * 1024) {
       return error('image 不能为空且大小小余500Kb');
     }
     if (model && model < 1 && model > 50) {
@@ -168,7 +168,7 @@ module.exports = class ImgSpecialEffects {
    * @return A Promise Object
    */
   facesticker(image, sticker) {
-    if (image && Buffer.byteLength(image, 'base64') >= 5120) {
+    if (image && Buffer.byteLength(image, 'base64') >= 500 * 1024) {
       return error('image 不能为空 且 大小小余500Kb');
     }
     if (sticker && sticker < 1 && sticker > 32) {
@@ -191,7 +191,7 @@ module.exports = class ImgSpecialEffects {
    * @return A Promise Object
    */
   faceage(image) {
-    if (image && Buffer.byteLength(image, 'base64') >= 5120) {
+    if (image && Buffer.byteLength(image, 'base64') >= 500 * 1024) {
       return error('image 不能为空 且 大小小余500Kb');
     }
     return PS(URIS.faceage, this.appKey, Object.assign({}, commonParams(), {
