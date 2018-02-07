@@ -7,8 +7,8 @@ const fs = require('fs');
 
 module.exports.APP = {
   // 设置请求数据（应用密钥、接口请求参数）
-  appkey: 'de80dZriJUIpyYaA',
-  appid: '1106658418'
+  appkey: '',
+  appid: ''
 };
 
 module.exports.fsReadSync = function (fsPath) {

@@ -68,13 +68,13 @@ module.exports = class Person {
     if (image && Buffer.byteLength(image, 'base64') >= 1048576) {
       return error('image 不能为空且大小小余1M');
     }
-    if (person_name) {
+    if (!person_name) {
       return error('person_name 不能为空');
     }
-    if (group_ids) {
+    if (!group_ids) {
       return error('group_ids 不能为空');
     }
-    if (person_id) {
+    if (!person_id) {
       return error('person_id 不能为空');
     }
     return PS(URIS.newperson, this.appKey, Object.assign({}, commonParams(), {
@@ -96,7 +96,7 @@ module.exports = class Person {
    * @return A Promise Object
    */
   delperson(person_id) {
-    if (person_id) {
+    if (!person_id) {
       return error('person_id 不能为空');
     }
     return PS(URIS.delperson, this.appKey, Object.assign({}, commonParams(), {
@@ -115,16 +115,16 @@ module.exports = class Person {
    * addface('imageBase64String|imageBase64String', '1509333186', '王小二')
    * @return A Promise Object
    */
-  addface(image, person_id, tag = '') {
-    if (image && Buffer.byteLength(image, 'base64') >= 1048576) {
+  addface(images, person_id, tag = '') {
+    if (images && Buffer.byteLength(images, 'base64') >= 1048576) {
       return error('image 不能为空且大小小余1M');
     }
-    if (person_id) {
+    if (!person_id) {
       return error('person_id 不能为空');
     }
     return PS(URIS.addface, this.appKey, Object.assign({}, commonParams(), {
       app_id: this.appId,
-      image: image,
+      images: images,
       person_id: person_id,
       tag: tag
     }));
@@ -140,10 +140,10 @@ module.exports = class Person {
    * @return A Promise Object
    */
   delface(person_id, face_ids) {
-    if (person_id) {
+    if (!person_id) {
       return error('person_id 不能为空');
     }
-    if (face_ids) {
+    if (!face_ids) {
       return error('face_ids 不能为空');
     }
     return PS(URIS.delface, this.appKey, Object.assign({}, commonParams(), {
@@ -164,10 +164,10 @@ module.exports = class Person {
    * @return A Promise Object
    */
   setinfo(person_id, person_name, tag = '') {
-    if (person_id) {
+    if (!person_id) {
       return error('person_id 不能为空');
     }
-    if (person_name) {
+    if (!person_name) {
       return error('person_name 不能为空');
     }
     return PS(URIS.setinfo, this.appKey, Object.assign({}, commonParams(), {
@@ -187,7 +187,7 @@ module.exports = class Person {
    * @return A Promise Object
    */
   getinfo(person_id) {
-    if (person_id) {
+    if (!person_id) {
       return error('person_id 不能为空');
     }
     return PS(URIS.getinfo, this.appKey, Object.assign({}, commonParams(), {
@@ -218,7 +218,7 @@ module.exports = class Person {
    * @return A Promise Object
    */
   getpersonids(group_id) {
-    if (group_id) {
+    if (!group_id) {
       return error('group_id 不能为空');
     }
     return PS(URIS.getpersonids, this.appKey, Object.assign({}, commonParams(), {
@@ -236,7 +236,7 @@ module.exports = class Person {
    * @return A Promise Object
    */
   getfaceids(person_id) {
-    if (person_id) {
+    if (!person_id) {
       return error('person_id 不能为空');
     }
     return PS(URIS.getfaceids, this.appKey, Object.assign({}, commonParams(), {
@@ -254,7 +254,7 @@ module.exports = class Person {
    * @return A Promise Object
    */
   getfaceinfo(face_id) {
-    if (face_id) {
+    if (!face_id) {
       return error('face_id 不能为空');
     }
     return PS(URIS.getfaceinfo, this.appKey, Object.assign({}, commonParams(), {
@@ -278,7 +278,7 @@ module.exports = class Person {
     if (image && Buffer.byteLength(image, 'base64') >= 1048576) {
       return error('image 不能为空且大小小余1M');
     }
-    if (group_id) {
+    if (!group_id) {
       return error('group_id 不能为空');
     }
     if (topn && topn < 1 || topn > 10) {
@@ -306,7 +306,7 @@ module.exports = class Person {
     if (image && Buffer.byteLength(image, 'base64') >= 1048576) {
       return error('image 不能为空且大小小余1M');
     }
-    if (person_id) {
+    if (!person_id) {
       return error('person_id 不能为空');
     }
     return PS(URIS.faceverify, this.appKey, Object.assign({}, commonParams(), {

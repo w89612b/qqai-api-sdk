@@ -1,36 +1,86 @@
-
 const https = require('https');
 const crypto = require('crypto');
-
+const {
+  APP
+} = require('./util');
+const {
+  URIS,
+  textToGBK,
+  commonParams
+} = require('../src/util');
+const fs = require('fs');
 const querystring = require('querystring');
 const iconv = require('iconv-lite')
-//iconv.encode(querystring.escape('你好，我是楠尼玛'), 'gbk').toString('binary')
-//console.log(Utf8ToUnicode(querystring.escape('你好，我是楠尼玛')))
-//'%C4%E3%BA%C3%A3%AC%CE%D2%CA%C7%E9%AA%C4%E1%C2%'
-var str =  'nonce_str=61MK23K317RL1WD1&time_stamp=1517915781&app_id=1106658418&text=%C4%E3%BA%C3%A3%AC%CE%D2%CA%C7%E9%AA%C4%E1%C2%&sign=6D7458245A2236C930FD7560D5204465';
-var sign = crypto.createHash('md5').update(str).digest('hex').toUpperCase()
-console.log(sign)
-var requestOpt = {
+const requestOpt = {
   protocol: 'https:',
   hostname: 'api.ai.qq.com',
   port: 443,
   method: 'POST',
-  path: '/fcgi-bin/nlp/nlp_wordseg',
+  path: URIS.wordseg,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/x-www-form-urlencoded;'
   }
 };
+const opt = Object.assign({}, commonParams(), {
+  app_id: APP.appid,
+  text: textToGBK('ａ'),
+  sign: ''
+})
+const ksort = (opt) => {
+  let arrayList = [],
+    sort = (a, b) => {
+      return a.key < b.key ? -1 : a.key > b.key ? 1 : 0;
+    };
+  for (let key in opt) {
+    arrayList.push({
+      "key": key,
+      "value": opt[key]
+    })
+  }
+  return arrayList.sort(sort)
+}
 
-var proxy = https.request(requestOpt , (pres) => {
-  let body = ''
-  pres.on('data', (d) => {
-    body += d;
+
+const getReqSign = (opt, appkey) => {
+  let parList, sign, str = '';
+  parList = ksort(opt);
+  parList.map((item) => {
+    if (item.value !== '') {
+      str += `${item.key}=${item.value}&`;
+    }
+  });
+  str += `app_key=${appkey}`;
+  sign = crypto.createHash('md5').update(str).digest('hex').toUpperCase()
+  console.log(str)
+  return {
+    sign,
+    str
+  };
+}
+var proxy = https.request(requestOpt, (pres) => {
+  let arrBuf = [],
+    bufLength = 0,
+    code = pres.headers['content-type'].split('=')[1];
+  pres.on('data', (chunk) => {
+    arrBuf.push(chunk);
+    bufLength += chunk.length;
   }).on('end', () => {
-    console.log(JSON.parse(body));
+    let chunkAll = Buffer.concat(arrBuf, bufLength);;
+    let decodedBody = iconv.decode(chunkAll, code ? code : 'utf8');
+    let res = JSON.parse(decodedBody);
+    console.log(JSON.stringify(res))
   });
 }).on('error', (e) => {
   console.log(e);
 });
-// 写入数据到请求主体
-proxy.write(str+ `&sign=${sign}`);
+const {
+  sign,
+  str
+} = getReqSign(opt, APP.appkey);
+// opt.sign = sign
+// const postData = querystring.stringify(opt)
+const postData = str + '&sign=' + sign
+console.log(postData)
+proxy.write(postData);
 proxy.end();
+

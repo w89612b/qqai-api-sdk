@@ -33,13 +33,13 @@ translate.texttranslate({
 })
 // 图片翻译
 translate.imagetranslate({
-  image: fsReadSync(`${__dirname}/file/jp.jpg`),
+  image: fsReadSync(`${__dirname}/file/kr.jpg`),
   session_id: randomstring.generate({
     length: 16,
     capitalization: 'uppercase'
   }),
   scene: 'doc',
-  source: 'jp',
+  source: 'kr',
   target: 'zh'
 }).then((res) => {
   console.log('图片翻译', JSON.stringify(res));
@@ -48,7 +48,7 @@ translate.imagetranslate({
 })
 // 语音翻译
 translate.speechtranslate({
-  speech_chunk: fsReadSync(`${__dirname}/file/tta_1516975854420_Voice.pcm`),
+  speech_chunk: fsReadSync(`${__dirname}/file/VOICE1513237078.pcm`),
   session_id: randomstring.generate({
     length: 16,
     capitalization: 'uppercase'

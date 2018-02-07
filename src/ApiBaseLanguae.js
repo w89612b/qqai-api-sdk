@@ -1,7 +1,8 @@
 const {
   URIS,
   commonParams,
-  error
+  error,
+  textToGBK
 } = require('./util');
 const PS = require('./client/ProxyServices');
 /**
@@ -9,6 +10,8 @@ const PS = require('./client/ProxyServices');
  * @description 提供QQAI自然语言处理API基础服务模块的API调用
  * @author wubo 2018-01-30
  * @version 1.0.4
+ * @update
+ *  2018-02-07 解决GBK转码问题 加入GBK转码 GBK转码的不能包含半角对应的数字和字母 V1.1.3
  */
 module.exports = class BaseLanguae {
   /**
@@ -49,8 +52,8 @@ module.exports = class BaseLanguae {
     if (text && Buffer.byteLength(text, 'GBK') < 1024) {
       return PS(URIS.wordseg, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
-        text: text
-      }));
+        text: textToGBK(text)
+      }), true);
     } else {
       return error(`text不能为空 或者GBK编码应小于1024B`);
     }
@@ -70,8 +73,8 @@ module.exports = class BaseLanguae {
     if (text && Buffer.byteLength(text, 'GBK') < 1024) {
       return PS(URIS.wordpos, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
-        text: text
-      }));
+        text: textToGBK(text)
+      }), true);
     } else {
       return error(`text不能为空 或者GBK编码应小于1024B`);
     }
@@ -91,8 +94,8 @@ module.exports = class BaseLanguae {
     if (text && Buffer.byteLength(text, 'GBK') < 1024) {
       return PS(URIS.wordner, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
-        text: text
-      }));
+        text: textToGBK(text)
+      }), true);
     } else {
       return error(`text不能为空 或者GBK编码应小于1024B`);
     }
@@ -112,8 +115,8 @@ module.exports = class BaseLanguae {
     if (text && Buffer.byteLength(text, 'GBK') < 1024) {
       return PS(URIS.wordsyn, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
-        text: text
-      }));
+        text: textToGBK(text)
+      }), true);
     } else {
       return error(`text不能为空 或者GBK编码应小于1024B`);
     }

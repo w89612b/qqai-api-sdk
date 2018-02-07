@@ -5,8 +5,46 @@
  * @exports error 参数错误处理方法， 模拟服务器返回 通用定义错误类型为4096
  * @author wubo 2018-01-30
  * @version 1.0.4
+ * @update
+ *  2018-02-07 解决GBK转码问题 加入Stack, nulBase , textToGBK V1.1.3
  */
 const randomString = require('randomstring');
+const iconv = require('iconv-lite');
+const Stack = {
+  dataStore: [],
+  top: 0,
+  push: function (el) {
+    this.dataStore[this.top++] = el;
+  },
+  pop: function () {
+    return this.dataStore[--this.top];
+  },
+  peek: function () {
+    return this.dataStore[this.top - 1];
+  },
+  length: function () {
+    return this.top;
+  },
+  clear: function () {
+    this.top = 0;
+  }
+};
+// 转换进制
+const nulBase = function (num, base) {
+  var s = Object.create(Stack),
+    n = num;
+  do {
+    s.push(n % base);
+    n = Math.floor(n /= base);
+  } while (n > 0);
+  var converted = "";
+  var code = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+  while (s.length() > 0) {
+    converted += base > 10 ? code[s.pop()] : s.pop();
+  }
+  //console.log(`${num} converted to base ${base} is ${converted}`)
+  return converted;
+}
 module.exports.URIS = {
   // 智能语音
   // 语音合成doc https://ai.qq.com/doc/aaitts.shtml
@@ -137,11 +175,22 @@ module.exports.commonParams = () => {
 }
 
 module.exports.error = (msg) => {
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, reject) => {
     reject({
       "ret": 4096,
       "msg": msg,
       "data": {}
     });
   });
+}
+
+
+module.exports.textToGBK = (text) => {
+  // http://www.qqxiuzi.cn/zh/hanzi-gbk-bianma.php
+  let str = iconv.encode(text, 'gbk'),
+    strList = [];
+  str.map(item => {
+    strList.push(nulBase(item, 16))
+  })
+  return `%${strList.join('%')}`
 }
