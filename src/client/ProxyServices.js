@@ -154,11 +154,8 @@ class ProxyServices {
         }
       });
     }
-
-    // 3. 拼接app_key
-    str += `app_key=${this.appkey}`;
     // 4. MD5运算+转换大写，得到请求签名
-    sign = crypto.createHash('md5').update(str).digest('hex').toUpperCase()
+    sign = crypto.createHash('md5').update(str += `app_key=${this.appkey}`).digest('hex').toUpperCase()
     //console.log(sign)
     return {
       sign,
@@ -202,7 +199,7 @@ class ProxyServices {
     } = this.getReqSign()
     this.opt['sign'] = sign;
     // 提交数据组装
-    this.postData = !this.isGBK ? querystring.stringify(this.opt) : str + '&sign=' + sign;
+    this.postData = !this.isGBK ? querystring.stringify(this.opt) : str + 'sign=' + sign;
     // 请求数据组装
     this.requestOpt = {
       protocol: 'https:', // <string> 使用的协议。默认为 http:
