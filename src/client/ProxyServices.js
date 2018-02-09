@@ -155,7 +155,7 @@ class ProxyServices {
       });
     }
     // 4. MD5运算+转换大写，得到请求签名
-    sign = crypto.createHash('md5').update(str += `app_key=${this.appkey}`).digest('hex').toUpperCase()
+    sign = crypto.createHash('md5').update(str + `app_key=${this.appkey}`).digest('hex').toUpperCase()
     //console.log(sign)
     return {
       sign,
