@@ -166,6 +166,7 @@ class ProxyServices {
   /**
    * 代理请求
    * 2018-02-07 修改数据回调，根据返回数据格式进行转码操作
+   * 2018-02-25 修改数据回调，提升程序健壮性
    */
   request() {
     var proxy = https.request(this.requestOpt, (pres) => {
@@ -178,9 +179,13 @@ class ProxyServices {
       }).on('end', () => {
         let chunkAll = Buffer.concat(arrBuf, bufLength);
         let decodedBody = iconv.decode(chunkAll, code ? code : 'utf8');
-        let res = JSON.parse(decodedBody);
-        res.retMsg = res.ret < 0 ? '表示系统出错，例如网络超时；一般情况下需要发出告警，共同定位问题原因。' : res.ret > 0 ? errorCode[res.ret] : '恭喜一切正常';
-        this.resolve(res);
+        try {
+          let res = JSON.parse(decodedBody);
+          res.retMsg = res.ret < 0 ? '表示系统出错，例如网络超时；一般情况下需要发出告警，共同定位问题原因。' : res.ret > 0 ? errorCode[res.ret] : '恭喜一切正常';
+          this.resolve(res);
+        } catch (error) {
+          this.resolve(decodedBody);
+        }
       });
     }).on('error', (e) => {
       this.reject(e);

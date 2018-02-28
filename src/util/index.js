@@ -69,6 +69,8 @@ module.exports.URIS = {
   detectmultiface: '/fcgi-bin/face/face_detectmultiface',
   // 人脸对比doc https://ai.qq.com/doc/facecompare.shtml
   facecompare: '/fcgi-bin/face/face_facecompare',
+  // 跨年龄人脸识别doc https://ai.qq.com/doc/detectcrossageface.shtml
+  detectcrossageface: '/fcgi-bin/face/face_detectcrossageface',
   // 五官定位doc https://ai.qq.com/doc/faceshape.shtml
   faceshape: '/fcgi-bin/face/face_faceshape',
   // 人脸识别doc https://ai.qq.com/doc/faceidentify.shtml

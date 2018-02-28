@@ -6,6 +6,7 @@ const PS = require('./client/ProxyServices');
  * @author wubo 2018-02-03
  * @version 1.0.9
  * 2018-02-06  移动人脸识别和人脸验证到APIPerson类中  1.1.2
+ * 2018-02-28  加入跨年龄人脸识别接口-detectcrossageface  1.1.7
  */
 module.exports = class Face {
   /**
@@ -15,6 +16,7 @@ module.exports = class Face {
    * @function detectface 人脸分析
    * @function detectmultiface 多人脸检测
    * @function facecompare 人脸对比
+   * @function detectcrossageface 跨年龄人脸识别
    * @function faceshape 五官定位
    * @example
    * new Face('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
@@ -95,6 +97,30 @@ module.exports = class Face {
     }));
   }
 
+  /**
+   * 跨年龄人脸识别
+   * @description 对比两张图片，并找出相似度最高的两张人脸；支持多人合照、两张图片中的人处于不同年龄段的情况。 建议：source_image中的人脸尽量不超过10个，target_image中的人脸尽量不超过15个。
+   * @link 具体参数查看：https://ai.qq.com/doc/detectcrossageface.shtml
+   * @param {String} source_image 待比较图片 原始图片的base64编码数据（原图大小上限1MB）
+   * @param {String} target_image 待比较图片 原始图片的base64编码数据（原图大小上限1MB）
+   * @example
+   * detectcrossageface(imageBase64String, imageBase64String)
+   * @return A Promise Object
+   */
+  detectcrossageface(source_image, target_image){
+    if (source_image && Buffer.byteLength(source_image, 'base64') >= 1048576) {
+      return error('source_image 不能为空且大小小余1M');
+    }
+    if (target_image && Buffer.byteLength(target_image, 'base64') >= 1048576) {
+      return error('target_image 不能为空且大小小余1M');
+    }
+    return PS(URIS.detectcrossageface, this.appKey, Object.assign({}, commonParams(), {
+      app_id: this.appId,
+      source_image: source_image,
+      target_image: target_image
+    }));
+  }
+  
   /**
    * 五官定位
    * @description 对请求图片进行五官定位，计算构成人脸轮廓的88个点，包括眉毛（左右各8点）、眼睛（左右各8点）、鼻子（13点）、嘴巴（22点）、脸型轮廓（21点）

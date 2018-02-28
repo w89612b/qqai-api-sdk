@@ -173,7 +173,7 @@ module.exports = class Translate {
    * @prop {string} session_id   非空且长度上限64B
    * @prop {string} speech_chunk 语音分片数据的Base64编码，非空且长度上限8MB
    * @prop {string} source 默认auto 中文	zh / 英文	en/ 日文	jp /韩文	kr / 自动识别（中英互译）	auto
-   * @prop {string} target 默认en  en=>	zh / zh=>	en, jp, kr / jp=>zh / kr=> zh
+   * @prop {string} target 默认auto  en=>	zh / zh=>	en, jp, kr / jp=>zh / kr=> zh
    * @example 
    *  speechtranslate({
    *    format: '3',
@@ -193,7 +193,7 @@ module.exports = class Translate {
     session_id = '',
     speech_chunk = '',
     source = 'auto',
-    target = 'en'
+    target = 'auto'
   }) {
     if (speech_chunk && session_id) {
       if (Buffer.byteLength(speech_chunk, 'base64') < 1048576 * 8) {
@@ -232,7 +232,7 @@ module.exports = class Translate {
    */
   textdetect({
     text,
-    candidate_langs = '',
+    candidate_langs = 'zh,en,kr,jp',
     force = 0
   }) {
     if (text && Buffer.byteLength(text, 'utf8') < 1024) {
