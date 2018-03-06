@@ -12,6 +12,6 @@
   },
   "license": "ISC",
   "dependencies": {
-    "qqai-api-sdk": "^1.1.8"
+    "qqai-api-sdk": "^1.1.9"
   }
 }
