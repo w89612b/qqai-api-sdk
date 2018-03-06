@@ -1,0 +1,76 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>腾讯语音API</title>
+  <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/public/doc.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          QQAI自然语言处理(智能闲聊)
+        </div>
+        <div class="textchatBox"></div>
+        <form id="textchatForm">
+          <div class="form-group">
+            <input type="hidden" name="session" value="10000">
+            <textarea class="form-control form-control-sm" maxlength="150" id="question" name="question" rows="3" placeholder="请输入发送内容"></textarea>
+          </div>
+          <button class="btn btn-outline-primary btn-sm" type="submit">发送</button>
+        </form>
+      </div>
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          QQAI自然语言处理(基础文本分析)
+        </div>
+        <form id="textForm">
+          <div class="form-group">
+            <textarea class="form-control form-control-sm" maxlength="150" name="text" rows="3" placeholder="请输入发送内容"></textarea>
+          </div>
+          <button class="btn btn-outline-primary btn-sm" type="button">分词</button>
+          <button class="btn btn-outline-primary btn-sm" type="button">词性标注</button>
+          <button class="btn btn-outline-primary btn-sm" type="button">专有名词识别</button>
+          <button class="btn btn-outline-primary btn-sm" type="button">同义词识别</button>
+        </form>
+        <div class="textCallback"></div>
+      </div>
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          QQAI自然语言处理(语义解析)
+        </div>
+        <form id="wordcomForm">
+          <div class="form-group">
+            <textarea class="form-control form-control-sm" maxlength="150" name="text" rows="3" placeholder="请输入发送内容"></textarea>
+          </div>
+          <button class="btn btn-outline-primary btn-sm" type="submit">解析</button>
+        </form>
+        <p class="tips">提示：发送前需要清除文字包含的空格</p>
+        <div class="wordcomBox"></div>
+      </div>
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          QQAI自然语言处理(情感分析)
+        </div>
+        <form id="textpolarForm">
+          <div class="form-group">
+            <textarea class="form-control form-control-sm" maxlength="150" name="text" rows="3" placeholder="请输入发送内容"></textarea>
+          </div>
+          <button class="btn btn-outline-primary btn-sm" type="submit">分析</button>
+        </form>
+        <div class="textpolarBox"></div>
+      </div>
+    </div>
+  </div>
+  <script src="/public/baselanguae.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>人体管理-腾讯AI</title>
+  <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/public/doc.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          计算机视觉-人体管理
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">部门</span>
+          </div>
+          <select id="depGroups" class="form-control">
+            <option>Default select</option>
+          </select>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal" type="button">增加人员</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-bordered table-dark ptable">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">名字</th>
+          <th scope="col">备注信息</th>
+          <th scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">人员管理</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="persion">
+              <div class="form-group">
+                <label for="recipient-groups" class="col-form-label">部门:</label>
+                <select class="form-control" name="group_ids" id="recipient-groups">
+                  <option>Default select</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message-image" class="col-form-label">员工人脸:</label>
+                <button type="button" class="btn btn-secondary btn_sm file_btn">选择文件</button>
+                <div class="form-control">
+                  <img class="face_image" src="" alt="">
+                </div>
+                <input type="file" name="face_image" accept="image/jpeg,image/png,image/bmp">
+                <input type="hidden" name="image" >
+              </div>
+              <div class="form-group">
+                <label for="message-name" class="col-form-label">名字:</label>
+                <input type="text" class="form-control" name="person_name" id="message-name">
+              </div>
+              <div class="form-group">
+                <label for="message-tag" class="col-form-label">备注:</label>
+                <textarea class="form-control" name="tag" id="message-tag"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary addPersion">保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="edit_persion_model" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">编辑信息</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="edit_persion">
+              <div class="form-group">
+                <input type="hidden" name="person_id">
+                <label for="message-name" class="col-form-label">名字:</label>
+                <input type="text" class="form-control" name="person_name" id="message-name">
+              </div>
+              <div class="form-group">
+                <label for="message-tag" class="col-form-label">备注:</label>
+                <textarea class="form-control" name="tag" id="message-tag"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary setPersion">保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="edit_persion_face_model" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">编辑人脸</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="viewImg">
+              <input type="file" name="file" id="file">
+              <ul>
+                <li class="addbtn"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="/public/picview/picview.css">
+  <script src="/public/picview/picview.js"></script>
+  <script src="/public/persion.js"></script>
+</body>
+
+</html>

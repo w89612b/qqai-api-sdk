@@ -1,0 +1,170 @@
+[data-ui='picview'] img{
+  cursor: zoom-in;
+}
+.body_overflow{
+  overflow: hidden;
+}
+.PicViewBox {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: zoom-out;
+  z-index: 100000;
+  background-color:  rgba(34,34,34,0.6);
+  display: none;
+}
+
+.PicViewBox .imgBox{
+  position: relative;
+  display: table-cell;
+  box-sizing: border-box;
+  vertical-align: middle;
+  margin: 0 auto;
+  text-align: center;
+  transition: transform 0.2s,opacity 0.2s;
+  transform: scale(1);
+  z-index: 100003;
+}
+.PicViewBox .imgBox .figure {
+  margin: 0;
+}
+.PicViewBox .imgBox .figure .imgView{
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  cursor: pointer;
+  user-select: none;
+}
+.PicViewBox .imgViewbtn {
+  position: absolute;
+  opacity: .65;
+  margin: -55px 0 0;
+  top: 50%;
+  padding: 0;
+  width: 90px;
+  height: 110px;
+  overflow: visible;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  -webkit-appearance: none;
+  display: block;
+  outline: 0;
+  z-index: 100004;
+  box-shadow: none;
+  touch-action: manipulation;
+  transition: opacity 0.2s;
+}
+
+.PicViewBox .imgViewbtn.prev{
+  left:0;
+}
+.PicViewBox .imgViewbtn.next{
+  right: 0;
+}
+.PicViewBox .imgViewbtn.close{
+  right: 0;
+  top:0;
+  display: block;
+  z-index: 100006;
+}
+
+.PicViewBox .imgViewbtn.prev:after, .PicViewBox .imgViewbtn.prev:before,
+.PicViewBox .imgViewbtn.next:after, .PicViewBox .imgViewbtn.next:before,
+.PicViewBox .imgViewbtn.close:after, .PicViewBox .imgViewbtn.close:before {
+  position: absolute;
+  content: '';
+  opacity: .65;
+  right: 50%;
+  top: 50%;
+  margin: -2px 0 0 -1px;
+  width: 2px;
+  height: 35px;
+  background-color: #fff;
+}
+
+.PicViewBox .imgViewbtn.prev:after{
+  transform: rotateZ(-45deg);
+  -ms-transform:rotate(-45deg);
+}
+.PicViewBox .imgViewbtn.prev:before{
+  margin: -27px 0 0 -1px;
+  transform: rotateZ(45deg);
+  -ms-transform:rotate(45deg);
+}
+
+
+.PicViewBox .imgViewbtn.next:after{
+  transform: rotateZ(45deg);
+  -ms-transform:rotate(45deg);
+}
+.PicViewBox .imgViewbtn.next:before{
+  margin: -27px 0 0 -1px;
+  transform: rotateZ(-45deg);
+  -ms-transform:rotate(-45deg);
+}
+
+.PicViewBox .imgViewbtn.close:after, .PicViewBox .imgViewbtn.close:before{
+  right: 40px;
+  top: 65px;
+}
+.PicViewBox .imgViewbtn.close:after{
+  transform: rotateZ(-45deg);
+  -ms-transform:rotate(-45deg);
+}
+.PicViewBox .imgViewbtn.close:before{
+  transform: rotateZ(45deg);
+  -ms-transform:rotate(45deg);
+}
+.PicViewBox .imgViewbtn:hover,.PicViewBox .imgViewbtn:hover:after,.PicViewBox .imgViewbtn:hover:before{
+  opacity: 1;
+}
+.loader--audioWave {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -1.5em;
+  width: 3em;
+  height: 2em;
+  background: linear-gradient(#000000, #000000) 0 50%, linear-gradient(#000000, #000000) 0.625em 50%, linear-gradient(#000000, #000000) 1.25em 50%, linear-gradient(#000000, #000000) 1.875em 50%, linear-gradient(#000000, #000000) 2.5em 50%;
+  background-repeat: no-repeat;
+  background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em;
+  animation: audioWave 1.5s linear infinite;
+  z-index: 100002;
+}
+@keyframes audioWave {
+  25% {
+    background: linear-gradient(#ffffff, #ffffff) 0 50%, linear-gradient(#000000, #000000) 0.625em 50%, linear-gradient(#000000, #000000) 1.25em 50%, linear-gradient(#000000, #000000) 1.875em 50%, linear-gradient(#000000, #000000) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 2em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em;
+  }
+  37.5% {
+    background: linear-gradient(#000000, #000000) 0 50%, linear-gradient(#ffffff, #ffffff) 0.625em 50%, linear-gradient(#000000, #000000) 1.25em 50%, linear-gradient(#000000, #000000) 1.875em 50%, linear-gradient(#000000, #000000) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.25em, 0.5em 2em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em;
+  }
+  50% {
+    background: linear-gradient(#000000, #000000) 0 50%, linear-gradient(#000000, #000000) 0.625em 50%, linear-gradient(#ffffff, #ffffff) 1.25em 50%, linear-gradient(#000000, #000000) 1.875em 50%, linear-gradient(#000000, #000000) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 2em, 0.5em 0.25em, 0.5em 0.25em;
+  }
+  62.5% {
+    background: linear-gradient(#000000, #000000) 0 50%, linear-gradient(#000000, #000000) 0.625em 50%, linear-gradient(#000000, #000000) 1.25em 50%, linear-gradient(#ffffff, #ffffff) 1.875em 50%, linear-gradient(#000000, #000000) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 2em, 0.5em 0.25em;
+  }
+  75% {
+    background: linear-gradient(#000000, #000000) 0 50%, linear-gradient(#000000, #000000) 0.625em 50%, linear-gradient(#000000, #000000) 1.25em 50%, linear-gradient(#000000, #000000) 1.875em 50%, linear-gradient(#ffffff, #ffffff) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 2em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .PicViewBox .imgViewbtn, .PicViewBox:after, .PicViewBox:before{
+    display: none;
+  }
+}

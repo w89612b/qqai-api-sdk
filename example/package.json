@@ -1,0 +1,17 @@
+{
+  "name": "aiqq",
+  "version": "1.0.0",
+  "description": "QQAI开放平台Nodejs SDK, 非官方平台提供示例程序",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "author":  {
+    "name": "wubo",
+    "email": "1280827369@qq.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "qqai-api-sdk": "^1.1.8"
+  }
+}

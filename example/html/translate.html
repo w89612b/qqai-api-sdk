@@ -1,0 +1,163 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>腾讯语音API</title>
+  <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/public/doc.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          QQAI自然语言处理(机器翻译)
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div class="btn-group collapse-btn" role="group">
+          <button type="button" class="btn btn-primary">文本翻译</button>
+          <button type="button" class="btn">图片翻译</button>
+          <button type="button" class="btn">语音翻译</button>
+        </div>
+      </div>
+    </div>
+    <div class="row collapse-box">
+      <div class="col-sm active">
+        <form id="texttransForm">
+          <div class="form-group">
+            <label for="exampleFormControlFile1">技术提供方</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" checked name="engine" id="fyj" value="fyj">
+                <label class="form-check-label" for="fyj">翻译君</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="engine" id="ailab" value="ailab">
+                <label class="form-check-label" for="ailab">腾讯AI Lab</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlFile1">语种</label>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <select id="source_lan" name="source_lan" class="form-control">
+                  <option value="auto" selected>中文</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <select id="target_lan" name="target_lan" class="form-control">
+                  <option value="auto" selected>英语</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <textarea class="form-control form-control-sm texttrans_text" maxlength="500" name="text" rows="10" placeholder="请输入需要翻译的内容"></textarea>
+              <label class="textarea_tips">0/500</label>
+            </div>
+            <div class="form-group col-md-6">
+              <div class="texttransBox"></div>
+            </div>
+          </div>
+          <p class="tips">提示：发送前需要清除文字包含的空格</p>
+        </form>
+      </div>
+      <div class="col-sm">
+        <form id="imagetranslateForm">
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <label for="lan">语种</label>
+              <select id="lan" name="lan" class="form-control">
+                <option value="auto-auto" selected>自动识别（中英互译）</option>
+                <option value="jp-zh">日文转中文</option>
+                <option value="kr-zh">韩文转中文</option>
+                <option value="zh-jp">中文转日文</option>
+                <option value="zh-kr">中文转韩文</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-5">
+              <label for="scene">识别类型</label>
+              <select id="scene" name="scene" class="form-control">
+                <option value="doc" selected>文档</option>
+                <option value="word">单词</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <div class="img_box">
+                <img id="viewImg" src="" alt="">
+                <label>原始图片</label>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-5">
+                  <button class="btn btn-primary filebtn" type="button">本地选择</button>
+                  <input type="file" class="form-control-file" id="imgFile">
+                </div>
+                <div class="form-group col-md-2">
+                  <p class="tips-and">或</p>
+                </div>
+                <div class="form-group col-md-5">
+                  <div class="input-group">
+                    <input type="text" id="url" class="form-control" placeholder="输入网络图片URL">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary imgUrl" type="button">检测</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="tips">提示：图片尺寸不超过2048*2048，图片大小不超过1M，请保证需要识别部分为图片主体部分</p>
+            </div>
+            <div class="form-group col-md-6">
+              <div class="imagetranslateBox"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm">
+        <form id="speechtranslateForm">
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <label for="lan">语种</label>
+              <select id="speechlan" name="lan" class="form-control">
+                <option value="auto-auto" selected>自动识别（中英互译）</option>
+                <option value="jp-zh">日文转中文</option>
+                <option value="kr-zh">韩文转中文</option>
+                <option value="zh-jp">中文转日文</option>
+                <option value="zh-kr">中文转韩文</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="speechtranslateBox"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <button class="btn btn-outline-primary btn-block speech" type="button">开始录音</button>
+            </div>
+            <div class="form-group col-md-6">
+              <button class="btn btn-outline-primary btn-block stop" type="button">开始识别</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="/public/gumadapter.js"></script>
+  <script src="/public/RecordRTC.js"></script>
+  <script src="/public/translate.js"></script>
+</body>
+
+</html>

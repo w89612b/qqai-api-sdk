@@ -58,6 +58,9 @@ translate.texttrans({text: '你好'}).then((res)=>{
 * [https://ai.qq.com/](https://ai.qq.com/)
 
 # 日志  
+2018年03月06日 版本 1.1.8   
+>SDK 示例程序发布
+
 2018年02月28日 版本 1.1.7   
 >添加 计算机视觉-面部识别 跨年龄人脸识别接口-detectcrossageface
 

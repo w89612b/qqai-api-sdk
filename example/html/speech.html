@@ -1,0 +1,140 @@
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>腾讯语音API</title>
+  <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/public/doc.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          QQAI语音-语音合成(TTS)
+        </div>
+        <form id="ttsForm">
+          <div class="form-group">
+            <label for="text">合成内容</label>
+            <textarea class="form-control form-control-sm" maxlength="150" id="text" name="text" rows="3" aria-describedby="emailHelp"
+              placeholder="请输入合成文字"></textarea>
+            <small id="emailHelp" class="form-text text-muted" style="display: none"></small>
+          </div>
+          <div class="form-group">
+            <label for="speaker">发音人</label>
+            <select id="speaker" name="speaker" class="form-control form-control-sm">
+              <option selected value="1">普通话男声</option>
+              <option value="5">静琪女声</option>
+              <option value="6">欢馨女声</option>
+              <option value="7">碧萱女声</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="format">输出格式</label>
+            <select id="format" name="format" class="form-control form-control-sm">
+              <option value="1">PCM</option>
+              <option selected value="2">WAV</option>
+              <option value="3">MP3</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="volume">音量</label>
+            <input type="number" id="volume" name="volume" max="10" min="-10" step="2" value="0" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label for="speed">语速</label>
+            <input type="number" id="speed" name="speed" max="200" min="50" step="10" value="100" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label for="aht">音调</label>
+            <input type="number" id="aht" name="aht" max="24" min="-24" step="3" value="0" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label for="apc">音色</label>
+            <input type="number" id="apc" name="apc" max="100" min="0" step="10" value="58" class="form-control form-control-sm">
+          </div>
+          <button class="btn speak btn-outline-primary btn-sm" type="submit">合成播放</button>
+          <button class="btn pause btn-outline-secondary btn-sm" type="button">暂停</button>
+          <button class="btn resume btn-outline-danger btn-sm" type="button">继续</button>
+        </form>
+      </div>
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          QQAI语音-语音合成(TTa)
+        </div>
+        <form id="ttaForm">
+          <div class="form-group">
+            <label for="text">合成内容</label>
+            <textarea class="form-control form-control-sm" maxlength="150" id="text" name="text" rows="3" aria-describedby="emailHelp"
+              placeholder="请输入合成文字"></textarea>
+            <small id="emailHelp" class="form-text text-muted" style="display: none"></small>
+          </div>
+          <div class="form-group">
+            <label for="model_type">发音人</label>
+            <select id="model_type" name="model_type" class="form-control form-control-sm">
+              <option selected value="0">女生</option>
+              <option value="1">女生纯英文</option>
+              <option value="2">男生</option>
+              <option value="6">喜道公子</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="speed">语速</label>
+            <input type="number" id="speed" name="speed" max="2" min="-1" step="1" value="0" class="form-control form-control-sm">
+          </div>
+          <button class="btn speak btn-outline-primary btn-sm" type="submit">合成播放</button>
+          <button class="btn pause btn-outline-secondary btn-sm" type="button">暂停</button>
+          <button class="btn resume btn-outline-danger btn-sm" type="button">继续</button>
+        </form>
+      </div>
+      <div class="col-sm">
+        <div class="alert alert-primary" role="alert">
+          QQAI-语音识别(ASR)
+        </div>
+        <form id="asrForm">
+          <div class="form-group">
+            <label for="rate">采样率</label>
+            <select id="rate" name="rate" class="form-control form-control-sm">
+              <option value="8000">8HZ</option>
+              <option selected value="16000">16HZ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="format">格式</label>
+            <select id="format" name="format" class="form-control form-control-sm">
+              <option value="1">PCM</option>
+              <option selected value="2">WAV</option>
+              <option value="3">AMR</option>
+              <option value="4">SILK</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="format">音频</label>
+            <audio controls autoplay></audio>
+          </div>
+          <div class="form-group">
+            <label for="format">识别内容</label>
+            <textarea class="form-control form-control-sm" id="discernC" rows="3" aria-describedby="emailHelp" placeholder="识别内容" readonly></textarea>
+          </div>
+          <button id="start" class="btn btn-outline-primary btn-sm" type="button">开始录音</button>
+          <button id="stop" class="btn btn-outline-primary btn-sm" type="button">停止录音</button>
+          <button id="play" class="btn btn-outline-primary btn-sm" type="button">播放录音</button>
+          <button id="record" class="btn btn-outline-primary btn-sm" type="button">base64转换</button>
+          <button id="discern" class="btn btn-outline-primary btn-sm" type="submit">识别</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="/public/gumadapter.js"></script>
+  <script src="/public/RecordRTC.js"></script>
+  <script src="/public/RTC.js"></script>
+  <script src="/public/tts.js"></script>
+</body>
+
+</html>
