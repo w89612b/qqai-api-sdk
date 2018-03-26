@@ -2,6 +2,7 @@ const https = require('https');
 const querystring = require('querystring');
 const crypto = require('crypto');
 const iconv = require('iconv-lite');
+const fs = require('fs');
 const errorCode = {
   "4096": "参数非法---请检查请求参数是否符合要求",
   "12289": "应用不存在---请检查app_id是否有效的应用标识（AppId）",
@@ -96,6 +97,8 @@ const errorCode = {
  *    修改数据回调，根据返回数据格式进行转码操作 
  *    增加签名GBK特殊操作
  *    增加iconv-lite依赖
+ *  2018-03-27
+ *    处理URL编码和java、PHP不一致的问题
  */
 class ProxyServices {
   constructor(uri, appkey, opt, resolve, reject, isGBK = false) {
@@ -154,8 +157,10 @@ class ProxyServices {
         }
       });
     }
+    // 处理URL编码和java、PHP不一致的问题
+    str = str.replace(/%20/g, '+')
     // 4. MD5运算+转换大写，得到请求签名
-    sign = crypto.createHash('md5').update(str + `app_key=${this.appkey}`).digest('hex').toUpperCase()
+    sign = crypto.createHash('md5').update(str + `app_key=${this.appkey}`, 'utf-8').digest('hex').toUpperCase()
     //console.log(sign)
     return {
       sign,
@@ -190,7 +195,9 @@ class ProxyServices {
     }).on('error', (e) => {
       this.reject(e);
     });
+    
     // 写入数据到请求主体
+    fs.writeFileSync(`${__dirname}\\data.txt`, this.postData, { encoding: 'utf8'})
     proxy.write(this.postData);
     proxy.end();
   }

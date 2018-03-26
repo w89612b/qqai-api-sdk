@@ -12,7 +12,9 @@ module.exports.APP = {
 };
 
 module.exports.fsReadSync = function (fsPath) {
-  return fs.readFileSync(fsPath, { encoding: 'base64'});
+  return fs.readFileSync(fsPath, {
+    encoding: 'base64'
+  });
 }
 
 module.exports.ttformat = {

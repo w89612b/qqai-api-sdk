@@ -5,7 +5,7 @@ $(document).ready(function ($) {
     var postData = {},
       $textchatBox = $('.textchatBox');
     $(this).serializeArray().map((item, index) => {
-      postData[item.name] = item.value.replace(/\s/g, '');
+      postData[item.name] = item.value;
     });
     $textchatBox.append('<div class="text"> ' + postData.question + ' :我</div>')
     $.post('/textchat', JSON.stringify(postData), function (res) {
@@ -26,7 +26,7 @@ $(document).ready(function ($) {
       text = $(e.target).text(),
       postURI = '';
     $('#textForm').serializeArray().map((item, index) => {
-      postData[item.name] = item.value.replace(/\s/g, '');
+      postData[item.name] = item.value;
     });
     switch (text) {
       case '分词':
@@ -79,7 +79,7 @@ $(document).ready(function ($) {
     e.stopPropagation();
     var postData = {};
     $('#wordcomForm').serializeArray().map((item, index) => {
-      postData[item.name] = item.value.replace(/\s/g, '');
+      postData[item.name] = item.value;
     });
     $.post('/wordcom', JSON.stringify(postData), function (res) {
       var html = ''
@@ -101,7 +101,7 @@ $(document).ready(function ($) {
     e.stopPropagation();
     var postData = {};
     $('#textpolarForm').serializeArray().map((item, index) => {
-      postData[item.name] = item.value.replace(/\s/g, '');
+      postData[item.name] = item.value;
     });
     $.post('/textpolar', JSON.stringify(postData), function (res) {
       var html = '情感: ' + res.data.polar + '<br><br>置信度: ' + res.data.confd;

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>活体监测</title>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    #face {
+      width: 360px;
+      height: 270px;
+      margin: 0 auto;
+      display: block;
+      position: relative;
+    }
+
+    #positions i {
+      display: inline-block;
+      width: 2px;
+      height: 2px;
+      background: red;
+      position: absolute;
+    }
+
+    video {
+      width: 360px;
+      height: 270px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    button {
+      display: block;
+      width: 100px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="face">
+    <video id="video"></video>
+    <p id="positions">
+
+    </p>
+  </div>
+  <button id="btn" type="button">开始</button>
+  <button id="btn-stop" type="button">停止</button>
+  <script>
+    var videoEl = document.getElementById('video');
+    var optEL = document.getElementById('positions');
+    var btnEl = document.getElementById('btn');
+    var canvasEl2 = document.createElement('CANVAS');
+    var canvasW = canvasEl2.width = videoEl.clientWidth;
+    var canvasH = canvasEl2.height = videoEl.clientHeight;
+    var ctx1 = canvasEl2.getContext('2d');
+    var IsetInterval = null;
+    var btnStopEl = document.getElementById('btn-stop');
+    navigator.getUserMedia({
+      video: {
+        width: 360,
+        height: 270
+      }
+    }, function (stream) {
+      if ("srcObject" in videoEl) {
+        videoEl.srcObject = stream
+      } else {
+        videoEl.src = (window.URL && window.URL.createObjectURL(stream))
+      }
+      videoEl.onloadedmetadata = function (e) {
+        videoEl.play();
+      };
+    }, function (err) {
+      alert(err.name)
+    })
+
+    function post(res) {
+      var positionString = "";
+      if (!res.ret) {
+        var face_data = res.data.face_shape_list[0];
+        face_data.face_profile.map(function (item) {
+          positionString += '<i data-name="face_profile" style="top: ' + Math.floor(item.y) + 'px; left: ' + Math.floor(
+            item.x) + 'px;"></i>'
+        })
+        face_data.left_eye.map(function (item) {
+          positionString += '<i data-name="left_eye" style="top: ' + Math.floor(item.y) + 'px; left: ' + Math.floor(
+            item.x) + 'px;"></i>'
+        })
+        face_data.left_eyebrow.map(function (item) {
+          positionString += '<i data-name="left_eyebrow" style="top: ' + Math.floor(item.y) + 'px; left: ' + Math.floor(
+            item.x) + 'px;"></i>'
+        })
+        face_data.mouth.map(function (item) {
+          positionString += '<i data-name="mouth" style="top: ' + Math.floor(item.y) + 'px; left: ' + Math.floor(
+            item
+            .x) + 'px;"></i>'
+        })
+        face_data.nose.map(function (item) {
+          positionString += '<i data-name="nose" style="top: ' + Math.floor(item.y) + 'px; left: ' + Math.floor(
+              item.x) +
+            'px;"></i>'
+        })
+        face_data.right_eye.map(function (item) {
+          positionString += '<i data-name="right_eye" style="top: ' + Math.floor(item.y) + 'px; left: ' + Math.floor(
+            item.x) + 'px;"></i>'
+        })
+        face_data.right_eyebrow.map(function (item) {
+          positionString += '<i data-name="right_eyebrow" style="top: ' + Math.floor(item.y) + 'px; left: ' + Math.floor(
+            item.x) + 'px;"></i>'
+        })
+      } else {
+        positionString = res.retmsg || res.msg
+      }
+      optEL.innerHTML = positionString
+    }
+    // 获取点
+    function Loop() {
+      ctx1.drawImage(videoEl, 0, 0, canvasW, canvasH);
+      var base64 = canvasEl2.toDataURL();
+      $.post('/face', JSON.stringify({
+        image: base64.split(',')[1],
+        index: 2
+      }), function (res) {
+        post(res)
+      })
+    }
+    // 注册事件
+    btnEl.addEventListener('click', function (e) {
+      IsetInterval = setInterval(Loop, 500)
+    })
+    btnStopEl.addEventListener('click', function (e) {
+      clearInterval(IsetInterval)
+    })
+  </script>
+</body>
+
+</html>

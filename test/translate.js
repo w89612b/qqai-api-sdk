@@ -16,7 +16,8 @@ const translate = new Translate(APP.appkey, APP.appid);
  */
 // 文本翻译（AI Lab）
 translate.texttrans({
-  text: '你好'
+  text: 'Hello 世界',
+  type: 0
 }).then((res) => {
   console.log('文本翻译(AI Lab)', JSON.stringify(res));
 }, (e) => {

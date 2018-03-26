@@ -69,7 +69,7 @@ $(document).ready(function ($) {
         var tips = '';
         switch (index) {
           case 2:
-            tips = '仅支持JPG、JPEG图片文件，图片大小不超过1M，请保证需要识别部分为图片主体部分';
+            tips = '提示：仅支持JPG、JPEG图片文件，图片大小不超过1M，请保证需要识别部分为图片主体部分';
             break;
           case 5:
           case 6:

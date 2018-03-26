@@ -2,7 +2,7 @@
 
 # 安装QQAI开放平台 Node.js SDK 非官方平台提供  
 所有测试文件来至网络 有版权啥的请联系我
-* http://qqai.jswebtest.com/
+* http://ai.jswebtest.com/
 
 **直接使用npm安装依赖：**
 ```sh
@@ -58,7 +58,10 @@ translate.texttrans({text: '你好'}).then((res)=>{
 * [https://ai.qq.com/](https://ai.qq.com/)
 
 # 日志  
-2018年03月06日 版本 1.1.8   
+2018年03月27日 版本 1.2.0   
+>处理签名处URL编码和java、PHP不一致的问题,解决例如语言类、翻译类需要清除空格的问题
+
+2018年03月06日 版本 1.1.9   
 >SDK 示例程序发布
 
 2018年02月28日 版本 1.1.7   

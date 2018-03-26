@@ -300,6 +300,9 @@ $(document).ready(function ($) {
     imgLength = 0;
     edit_face_Pid = '';
   });
+
+
+  
   if (browser.versions.android || browser.versions.weixin) {
     $file.attr("capture", "camera");
   } else {

@@ -38,7 +38,7 @@ imgPublic.scener({
   image: fsReadSync(!!process.platform.match(/^win/) ? `${__dirname}\\file\\scener.jpg` : `${__dirname}/file/scener.jpg`),
   topk: 5
 }).then((res) => {
-  res.data.object_list.map(item=>{
+  res.data.scene_list.map(item=>{
     item.label_id = resSceneKey[item.label_id]
   })
   console.log('场景识别', JSON.stringify(res));

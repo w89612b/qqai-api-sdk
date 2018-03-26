@@ -111,12 +111,12 @@ $(document).ready(function ($) {
       one = '';
     if (engine_val === 'fyj') {
       fyj_targetObj[val].map(function (item) {
-        topts += '<option value="' + item + '" >' + fyj_sourceObj[item] + '/option>'
+        topts += '<option value="' + item + '" >' + fyj_sourceObj[item] + '</option>'
       });
       one = fyj_targetObj[val][0]
     } else {
       ailab_targetObj[val].map(function (item) {
-        topts += '<option value="' + item + '" >' + ailab_sourceObj[item] + '/option>'
+        topts += '<option value="' + item + '" >' + ailab_sourceObj[item] + '</option>'
       });
       one = ailab_targetObj[val][0];
     }
@@ -134,7 +134,7 @@ $(document).ready(function ($) {
       $textarea_tips.removeAttr('style');
       var postData = {};
       $texttransForm.serializeArray().map((item, index) => {
-        postData[item.name] = item.value.replace(/\s/g, '');
+        postData[item.name] = item.value;
       });
       $.post('/texttrans', JSON.stringify(postData), function (res) {
         $texttransBox.text(res.data.trans_text || res.data.target_text || res.retMsg)

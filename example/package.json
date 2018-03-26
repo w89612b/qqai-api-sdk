@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "node index.js"
   },
-  "author":  {
+  "author": {
     "name": "wubo",
     "email": "1280827369@qq.com"
   },
   "license": "ISC",
   "dependencies": {
-    "qqai-api-sdk": "^1.1.9"
+    "multiparty": "^4.1.3",
+    "qqai-api-sdk": "^1.2.0"
   }
 }
