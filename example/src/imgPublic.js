@@ -17,7 +17,7 @@ module.exports = class ImgPublicService {
   porn(param, res) {
     imgPublic.porn(param).then(result => {
       result.data.tag_list.map(item => {
-        item.tag_name = resPornKey[item.tag_name]
+        item.tag_name = resPornKey[item.tag_name] || item.tag_name
       })
       res.write(JSON.stringify(result, null, 2));
       res.end();
@@ -30,7 +30,7 @@ module.exports = class ImgPublicService {
     imgPublic.terrorism(param).then(result => {
       try {
         result.data.tag_list.map(item=>{
-          item.tag_name = resTerrorismKey[item.tag_name]
+          item.tag_name = resTerrorismKey[item.tag_name] || item.tag_name
         })
         result.data.tag_list = result.data.tag_list.sort((a, b)=>{
           if(a.tag_confidence < b.tag_confidence){
@@ -58,7 +58,7 @@ module.exports = class ImgPublicService {
     imgPublic.scener(param).then(result => {
       try {
         result.data.scene_list.map(item=>{
-          item.label_id = resSceneKey[item.label_id]
+          item.label_id = resSceneKey[item.label_id] || item.label_id
         })
         res.write(JSON.stringify(result, null, 2));
         res.end();
@@ -71,11 +71,15 @@ module.exports = class ImgPublicService {
       res.end();
     })
   }
+  /**
+   * 
+   * 物品库增加 导致识别不了的ID  2018-04-18
+   */
   objectr(param, res){
     delete param.index
     imgPublic.objectr(param).then(result => {
       result.data.object_list.map(item=>{
-        item.label_id = resObjectKey[item.label_id]
+        item.label_id = resObjectKey[item.label_id] || item.label_id
       })
       res.write(JSON.stringify(result, null, 2));
       res.end();

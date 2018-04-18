@@ -155,10 +155,10 @@ module.exports = class BaseLanguaeServerice {
     baseLanguae.wordpos(param).then(result => {
       if (!result.ret) {
         result.data.base_tokens.map(item => {
-          item.pos_code = pos_code[item.pos_code];
+          item.pos_code = pos_code[item.pos_code] || item.pos_code;
         })
         result.data.mix_tokens.map(item => {
-          item.pos_code = pos_code[item.pos_code];
+          item.pos_code = pos_code[item.pos_code] || item.pos_code;
         })
       }
       res.write(JSON.stringify(result));
@@ -174,7 +174,7 @@ module.exports = class BaseLanguaeServerice {
       if (!result.ret) {
         if (result.data.ner_tokens.length) {
           result.data.ner_tokens.map(item => {
-            item.types[0] = types[item.types[0]];
+            item.types[0] = types[item.types[0]] || item.types[0];
           })
         }
       }
@@ -200,7 +200,7 @@ module.exports = class BaseLanguaeServerice {
     res.writeHead(200, this.headers);
     baseLanguae.wordcom(param).then(result => {
       if (!result.ret) {
-        result.data.intent = intents[result.data.intent];
+        result.data.intent = intents[result.data.intent] || result.data.intent;
         let key = 0,
           tokens = [],
           temp = [],

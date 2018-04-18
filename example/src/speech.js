@@ -46,10 +46,10 @@ module.exports = class SpeechService {
     speech.tta(params).then((result) => {
       if (!result.ret) {
         let nowdate = Date.now();
-        let dir = !!process.platform.match(/^win/) ? `${__dirname}\\..\\tta\\tta_${nowdate}_Voice.${ttformat['1']}` : `${__dirname}/../tta/tta_${nowdate}_Voice.${ttformat['1']}`;
+        let dir = !!process.platform.match(/^win/) ? `${__dirname}\\..\\tta\\tta_${nowdate}_Voice.${ttformat['3']}` : `${__dirname}/../tta/tta_${nowdate}_Voice.${ttformat['3']}`;
         fs.writeFileSync(dir, new Buffer(result.data.voice, 'base64'));
         res.write(JSON.stringify({
-          "url": `/tta/tta_${nowdate}_Voice.${ttformat['1']}`
+          "url": `/tta/tta_${nowdate}_Voice.${ttformat['3']}`
         }));
         res.end();
       } else {

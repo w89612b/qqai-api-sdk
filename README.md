@@ -2,7 +2,8 @@
 
 # 安装QQAI开放平台 Node.js SDK 非官方平台提供  
 所有测试文件来至网络 有版权啥的请联系我
-* http://ai.jswebtest.com/
+* PC端测试地址：[https://ai.hltips.com/](https://ai.hltips.com) 
+* 微信端测试地址：![微信端测试](https://github.com/w89612b/qqai-api-sdk/blob/master/newweb.jpg)
 
 **直接使用npm安装依赖：**
 ```sh
@@ -58,6 +59,10 @@ translate.texttrans({text: '你好'}).then((res)=>{
 * [https://ai.qq.com/](https://ai.qq.com/)
 
 # 日志  
+2018年04月18日 版本 1.2.1   
+>暂时物体识别去掉objectr接口format参数, 由于加入format参数物体识别会报签名错误  
+>微信小程序发布  由于微信个人账户的限制  带输入的内容无法发布 只能发布图片系列的
+
 2018年03月27日 版本 1.2.0   
 >处理签名处URL编码和java、PHP不一致的问题,解决例如语言类、翻译类需要清除空格的问题
 
