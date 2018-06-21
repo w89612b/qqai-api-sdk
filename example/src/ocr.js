@@ -66,6 +66,24 @@ module.exports = class OCRService {
       res.end();
     });
   }
+  plateocr(param, res) {
+    ocr.plateocr(param).then((result) => {
+      res.write(JSON.stringify(result));
+      res.end();
+    }, (e) => {
+      res.write(JSON.stringify(e));
+      res.end();
+    });
+  }
+  handwritingocr(param, res) {
+    ocr.handwritingocr(param).then((result) => {
+      res.write(JSON.stringify(result));
+      res.end();
+    }, (e) => {
+      res.write(JSON.stringify(e));
+      res.end();
+    });
+  }
   inPost(param, res) {
     res.writeHead(200, this.headers);
     switch (param.index) {
@@ -91,6 +109,12 @@ module.exports = class OCRService {
         break;
       case 6:
         this.generalocr(param.image, res)
+        break;
+      case 7:
+        this.handwritingocr(param.image, res)
+        break;
+      case 8:
+        this.plateocr(param.image, res)
         break;
     }
   }

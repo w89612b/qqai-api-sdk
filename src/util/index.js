@@ -8,6 +8,7 @@
  * @update
  *  2018-02-08 解决GBK转码问题 去掉Stack, nulBase ,  修改textToGBK V1.1.4
  *  2018-02-07 解决GBK转码问题 加入Stack, nulBase , textToGBK V1.1.3
+ *  2018-06-21 加入OCRURI 车牌识别和手写体识别 V1.2.2
  */
 const randomString = require('randomstring');
 const iconv = require('iconv-lite');
@@ -62,6 +63,10 @@ module.exports.URIS = {
   creditcardocr: '/fcgi-bin/ocr/ocr_creditcardocr',
   // 通用OCR识别doc https://ai.qq.com/doc/ocrgeneralocr.shtml
   generalocr: '/fcgi-bin/ocr/ocr_generalocr',
+  // 车牌OCR 识别doc:https://ai.qq.com/doc/plateocr.shtml
+  plateocr: '/fcgi-bin/ocr/ocr_plateocr',
+  // 手写体OCR 识别doc:https://ai.qq.com/doc/handwritingocr.shtml
+  handwritingocr: '/fcgi-bin/ocr/ocr_handwritingocr',
   // 人脸识别
   // 人脸分析doc https://ai.qq.com/doc/detectface.shtml
   detectface: '/fcgi-bin/face/face_detectface',

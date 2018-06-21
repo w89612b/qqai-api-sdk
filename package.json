@@ -1,6 +1,6 @@
 {
   "name": "qqai-api-sdk",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "QQAI开放平台Nodejs SDK, 非官方平台提供 文档以及详情请访问官网: https://ai.qq.com/doc/index.shtml",
   "main": "./src/index.js",
   "scripts": {

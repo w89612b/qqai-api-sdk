@@ -12,7 +12,9 @@ const ocr = new OCR(APP.appkey, APP.appid);
 /**
  * OCR API 测试文件
  * @author wubo  2018-02-04
- * @version 1.1.0
+ * @version 1.1.0 
+ * @update
+ * 2018-06-21 加入车牌识别和手写体识别 V1.2.2
  */
 ocr.idcardocr(fsReadSync(!!process.platform.match(/^win/) ? `${__dirname}\\file\\idcard0.jpg` : `${__dirname}/file/idcard0.jpg`)).then((res) => {
   res.data.frontimage = '';
@@ -56,4 +58,24 @@ ocr.generalocr(fsReadSync(!!process.platform.match(/^win/) ? `${__dirname}\\file
   console.log('通用OCR识别', JSON.stringify(res));
 }, (e) => {
   console.log('通用OCR识别', JSON.stringify(e));
+});
+ocr.plateocr('https://yyb.gtimg.com/ai/assets/ai-demo/large/plate-1-lg.jpg').then((res) => {
+  console.log('URL车牌识别', JSON.stringify(res));
+}, (e) => {
+  console.log('URL车牌识别', JSON.stringify(e));
+});
+ocr.plateocr(fsReadSync((!!process.platform.match(/^win/) ? `${__dirname}\\file\\` : `${__dirname}/file/`)+ 'plateocr4.jpg')).then((res) => {
+  console.log('文件车牌识别', JSON.stringify(res));
+}, (e) => {
+  console.log('文件车牌识别', JSON.stringify(e));
+});
+ocr.handwritingocr('https://thumbs.dreamstime.com/z/%E6%B1%89%E8%AF%AD%E6%89%8B%E5%86%99-36694605.jpg').then((res) => {
+  console.log('手写体OCR', JSON.stringify(res));
+}, (e) => {
+  console.log('手写体OCR', JSON.stringify(e));
+});
+ocr.handwritingocr(fsReadSync((!!process.platform.match(/^win/) ? `${__dirname}\\file\\` : `${__dirname}/file/`)+ 'handwritingocr.jpg')).then((res) => {
+  console.log('手写体OCR', JSON.stringify(res));
+}, (e) => {
+  console.log('手写体OCR', JSON.stringify(e));
 });

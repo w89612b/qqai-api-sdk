@@ -268,7 +268,7 @@ $(document).ready(function ($) {
       postData.speech_chunk = audioStr.split(',')[1];
       $.post('/speechtranslate', JSON.stringify(postData), function (res) {
         var html = '<div class="tsitem">\
-                  <div class="source">原文：' + res.data.source_text || res.retMsg + '</div>\
+                  <div class="source">原文：' + (res.data.source_text || res.retMsg) + '</div>\
                   <div class="target">译文：' + res.data.target_text + '</div>\
                 </div>';
         $speechtranslateBox.append(html);

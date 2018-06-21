@@ -9,6 +9,8 @@ const PS = require('./client/ProxyServices');
  * @description 提供QQAI OCR模块的API调用
  * @author wubo 2018-02-02
  * @version 1.0.7
+ * @update
+ * 2018-06-21 加入车牌识别和手写体识别 V1.2.2
  */
 module.exports = class OCR {
   /**
@@ -21,6 +23,8 @@ module.exports = class OCR {
    * @function bizlicenseocr(imageBase64String) 营业执照OCR识别
    * @function creditcardocr(imageBase64String) 银行卡OCR识别
    * @function generalocr(imageBase64String) 通用OCR识别
+   * @function plateocr(imageBase64String) 车牌识别
+   * @function handwritingocr(imageBase64String) 手写体识别
    * @example
    *  new OCR('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
@@ -152,6 +156,56 @@ module.exports = class OCR {
       }));
     } else {
       return error('imageBase64String 不能为空 且 大小小余1M');
+    }
+  }
+
+  /**
+   * 车牌OCR
+   * @description 识别车牌上面的字段信息
+   * 具体参数查看：https://ai.qq.com/doc/plateocr.shtml
+   * @param {String} imageBase64String 待识别图片或者待识别图片URI地址 原始图片的base64编码数据（原图大小上限1MB，支持JPG、PNG、BMP格式）
+   * @example
+   * plateocr(imageBase64String)
+   * @return A Promise Object
+   */
+  plateocr(imageBase64String) {
+    if (imageBase64String && /^http\S*[\.jpg|\.bmp|\.png]$/g.test(imageBase64String)) {
+      return PS(URIS.plateocr, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image_url: imageBase64String
+      }));
+    } else if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
+      return PS(URIS.plateocr, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: imageBase64String
+      }));
+    } else {
+      return error('image 不能为空 且 大小小余1M 或者不是正常的图片地址');
+    }
+  }
+
+  /**
+   * 手写体OCR	
+   * @description 检测和识别图像上面手写体的字段信息
+   * 具体参数查看：https://ai.qq.com/doc/handwritingocr.shtml
+   * @param {String} imageBase64String 待识别图片或者待识别图片URI地址 原始图片的base64编码数据（原图大小上限1MB，支持JPG、PNG、BMP格式）
+   * @example
+   * handwritingocr(imageBase64String)
+   * @return A Promise Object
+   */
+  handwritingocr(imageBase64String) {
+    if (imageBase64String && /^http\S*[\.jpg|\.bmp|\.png]$/g.test(imageBase64String)) {
+      return PS(URIS.handwritingocr, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image_url: imageBase64String
+      }));
+    } else if (imageBase64String && Buffer.byteLength(imageBase64String, 'base64') < 1048576) {
+      return PS(URIS.handwritingocr, this.appKey, Object.assign({}, commonParams(), {
+        app_id: this.appId,
+        image: imageBase64String
+      }));
+    } else {
+      return error('image 不能为空 且 大小小余1M 或者不是正常的图片地址');
     }
   }
 }

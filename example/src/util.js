@@ -23,6 +23,7 @@ module.exports.ttformat = {
     '3': 'mp3'
 }
 
+
 module.exports.Imgs = [{
     imglist: [{
         imgStr: '/image/0_1.jpg'
@@ -349,6 +350,24 @@ module.exports.OCRImgs = [{
         imgStr: '/image/ocr_11.jpg'
     }, {
         imgStr: '/image/ocr_12.jpg'
+    }]
+}, {
+    imglist: [{
+        imgStr: '/image/handwritingocr.jpg'
+    }, {
+        imgStr: '/image/ocr_2.jpg'
+    }]
+}, {
+    imglist: [{
+        imgStr: '/image/plateocr.jpg'
+    }, {
+        imgStr: '/image/plateocr1.jpg'
+    }, {
+        imgStr: '/image/plateocr2.jpg'
+    }, {
+        imgStr: '/image/plateocr3.jpg'
+    }, {
+        imgStr: '/image/plateocr4.jpg'
     }]
 }];
 module.exports.EffectsImgs = [{

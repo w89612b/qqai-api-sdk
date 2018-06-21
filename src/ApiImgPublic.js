@@ -10,6 +10,7 @@ const PS = require('./client/ProxyServices');
  * @author wubo 2018-02-02
  * @version 1.0.7
  * 2018-04-18 暂时物体识别去掉objectr接口format参数, 由于加入format参数现在会报签名错误   1.2.1  
+ * 2018-06-21 恢复物体识别objectr接口format参数, 由于腾讯API修复   1.2.2
  */
 module.exports = class ImgPublic {
   /**
@@ -122,18 +123,20 @@ module.exports = class ImgPublic {
    *  topk: 1
    * })
    * @return A Promise Object
-   * @update 暂时去掉format参数, 由于加入format参数现在会报签名错误   2018-04-18
+   * @update 
+   * 暂时去掉format参数, 由于加入format参数现在会报签名错误   2018-04-18
+   * 恢复format参数, 由于API修复format参数 2018-06-21
    */
   objectr({
     image,
-    // format = 1,
+    format = 1,
     topk = 1
   }) {
     if (image && Buffer.byteLength(image, 'base64') < 1048576) {
       return PS(URIS.objectr, this.appKey, Object.assign({}, commonParams(), {
         app_id: this.appId,
         image: image,
-        // format: format，
+        format: format,
         topk: topk
       }));
     } else {

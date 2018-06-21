@@ -3,7 +3,7 @@
 # 安装QQAI开放平台 Node.js SDK 非官方平台提供  
 所有测试文件来至网络 有版权啥的请联系我
 * PC端测试地址：[https://ai.hltips.com/](https://ai.hltips.com) 
-* 微信端测试地址：![微信端测试](https://github.com/w89612b/qqai-api-sdk/blob/master/newweb.jpg)
+* 微信端测试地址：![微信端测试](https://raw.githubusercontent.com/w89612b/qqai-api-sdk/master/newweb.jpg)
 
 **直接使用npm安装依赖：**
 ```sh
@@ -59,8 +59,12 @@ translate.texttrans({text: '你好'}).then((res)=>{
 * [https://ai.qq.com/](https://ai.qq.com/)
 
 # 日志  
+2018年06月21日 版本 1.2.2   
+>恢复物体识别objectr接口format参数, 由于官方API已经修复这个参数   
+>添加OCR接口类  加入车牌识别和手写体识别     
+
 2018年04月18日 版本 1.2.1   
->暂时物体识别去掉objectr接口format参数, 由于加入format参数物体识别会报签名错误  
+>暂时物体识别去掉objectr接口format参数, 由于加入format参数物体识别会报签名错误    
 >微信小程序发布  由于微信个人账户的限制  带输入的内容无法发布 只能发布图片系列的
 
 2018年03月27日 版本 1.2.0   
