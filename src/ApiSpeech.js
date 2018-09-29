@@ -9,6 +9,7 @@ const PS = require('./client/ProxyServices');
  * @description 提供QQAI智能语音模块的API调用
  * @author wubo 2018-01-30
  * @version 1.0.4
+ * 2018-09-29 添加关键词检索接口detectword
  */
 module.exports = class Speech {
   /**
@@ -21,6 +22,7 @@ module.exports = class Speech {
    * @function asrs(Object) 语音识别-流式版（AI Lab）
    * @function wxasrs(Object) 语音识别-流式版(WeChat AI)
    * @function wxasrlong(Object) 长语音识别
+   * @function detectword(Object) 关键词检索
    * @example
    *  new Speech('a95eceb1ac8c24ee28b70f7dbba912bf', '1000001')
    */
@@ -282,6 +284,50 @@ module.exports = class Speech {
       }
     } else {
       return error(`callback_url/speech 不能为空 或者 callback_url/speech_url不能为空`);
+    }
+  }
+
+  /**
+   * 关键词检索
+   * @description 关键词检索包含两个接口：语音上传接口，回调接口。用户调用语音上传接口上传语音，返回task_id，在识别完成后平台异步通知用户，返回识别结果。
+   * 具体参数查看：https://ai.qq.com/doc/detectword.shtml
+   * @prop {Number} format 默认2--- 语音压缩格式编码，取值范围[PCM	1 | WAV	2 | AMR	3 | SILK	4] 
+   * @prop {String} callback_url 用户回调url，需用户提供，用于平台向用户通知识别结果 
+   * @prop {String} key_words 待识别关键词 多个关键词之间用“|”分隔，每个词长度不低于两个字，上限500个词
+   * @prop {String} speech 待识别语音（时长上限15min） 语音数据的Base64编码，原始音频大小上限5MB
+   * @prop {String} speech_url 待识别语音下载地址（时长上限15min） 音频下载地址，音频大小上限30MB
+   * @example 
+   *  detectword({
+   *    format：1,
+   *    callback_url: 'url',
+   *    speech：database64,
+   *    key_words: 'A'
+   *    speech_url：'url',
+   *  })
+   * @return A Promise Object
+   */
+  detectword({
+    format = 2,
+    callback_url = '',
+    key_words = '',
+    speech = '',
+    speech_url = ''
+  }) {
+    if (callback_url && (speech || speech_url) && key_words) {
+      if (Buffer.byteLength(speech, 'base64') < 1048576 * 5 || speech_url) {
+        return PS(URIS.detectword, this.appKey, Object.assign({}, commonParams(), {
+          app_id: this.appId,
+          speech_url: speech_url,
+          speech: speech,
+          key_words: key_words,
+          callback_url: callback_url,
+          format: format
+        }));
+      } else {
+        return error(`speech大小必须小余5M`);
+      }
+    } else {
+      return error(`callback_url/speech 不能为空 或者 key_words/callback_url/speech_url不能为空`);
     }
   }
 }

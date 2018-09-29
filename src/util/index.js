@@ -23,6 +23,8 @@ module.exports.URIS = {
   wxasrs: '/fcgi-bin/aai/aai_wxasrs',
   // 长语音识别doc https://ai.qq.com/doc/wxasrlong.shtml
   wxasrlong: '/fcgi-bin/aai/aai_wxasrlong',
+  // 关键词检索doc https://ai.qq.com/doc/detectword.shtml
+  detectword:'/fcgi-bin/aai/aai_detectkeyword',
   // 自然语言处理
   // 基本文本分析doc https://ai.qq.com/doc/nlpbase.shtml
   wordseg: '/fcgi-bin/nlp/nlp_wordseg',

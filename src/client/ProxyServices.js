@@ -194,10 +194,10 @@ class ProxyServices {
       });
     }).on('error', (e) => {
       this.reject(e);
-    });
+    }); 
     
     // 写入数据到请求主体
-    fs.writeFileSync(`${__dirname}\\data.txt`, this.postData, { encoding: 'utf8'})
+    // fs.writeFileSync(`${__dirname}\\data.txt`, this.postData, { encoding: 'utf8'})
     proxy.write(this.postData);
     proxy.end();
   }

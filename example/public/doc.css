@@ -376,6 +376,7 @@ input[type="file"] {
   position: relative;
   display: inline-block;
   opacity: .6;
+  cursor: pointer;
 }
 .imglist-item img{
   width: 100%;
